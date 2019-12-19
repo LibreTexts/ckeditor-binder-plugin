@@ -6,5 +6,6 @@
   "extends": "airbnb-base",
   "globals": {
     "CKEDITOR": "readable",
+    "thebelab": "readable",
   },
 }
