@@ -1,3 +1,7 @@
-import '../styles/index.scss';
+// style sheets
+import '../styles/index.scss'
 
-console.log('webpack starterkit');
+import './config'
+import 'ckeditor4'
+
+CKEDITOR.replace('editor')
