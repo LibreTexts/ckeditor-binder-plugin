@@ -1,28 +1,13 @@
 {
-  "name": "webpack-starter",
-  "version": "1.0.0",
-  "description": "A light foundation for your next frontend project based on webpack.",
+  "name": "ckeditor-binder-plugin",
+  "version": "0.0.1",
+  "description": "A CKeditor plugin that makes adding binder enabled pre tags easy.",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js  --colors",
     "start": "webpack-dev-server --config webpack/webpack.config.dev.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/wbkd/webpack-starter.git"
-  },
-  "keywords": [
-    "webpack",
-    "startkit",
-    "frontend",
-    "es6",
-    "javascript",
-    "webdev"
-  ],
-  "author": "webkid.io",
+  "author": "Libretexts Jupyter Team",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/wbkd/webpack-starter/issues"
-  },
   "devDependencies": {
     "@babel/core": "^7.7.5",
     "@babel/plugin-proposal-class-properties": "^7.7.4",
