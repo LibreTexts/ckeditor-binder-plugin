@@ -3,10 +3,16 @@ import '../styles/index.scss';
 
 import './config';
 import 'ckeditor4';
-import './plugin';
+
+// this should be ran on every page
 import activateThebelab from './activateThebelab';
 
+// plugin registration
+import './plugin';
+
 CKEDITOR.config.extraPlugins = 'enableBinder';
+// plugin registraion end
+
 CKEDITOR.replace('editor');
 
 const thebelabConfig = {
@@ -20,10 +26,14 @@ const thebelabConfig = {
 };
 
 const output = document.getElementById('output');
+const { editor } = CKEDITOR.instances;
+const render = () => {
+  output.innerHTML = editor.getData();
+  activateThebelab(thebelabConfig);
+};
+
+// render button
 document.getElementById('render-html').addEventListener('click', (e) => {
   e.preventDefault();
-  const data = CKEDITOR.instances.editor.getData();
-  output.innerHTML = data;
-
-  activateThebelab(thebelabConfig);
+  render();
 });
