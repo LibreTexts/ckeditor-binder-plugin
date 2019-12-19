@@ -3,11 +3,8 @@
     "browser": true,
     "node": true
   },
-  "parserOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module"
+  "extends": "airbnb-base",
+  "globals": {
+    "CKEDITOR": "readable",
   },
-  "rules": {
-    "semi": 2
-  }
 }
