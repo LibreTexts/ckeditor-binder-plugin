@@ -1,3 +1,5 @@
+import activateThebelab from './activateThebelab';
+
 const insertPreWithBinder = (editor) => {
   // get selected element
   const selection = editor.getSelection();
@@ -14,10 +16,26 @@ const insertPreWithBinder = (editor) => {
   editor.insertElement(element);
 };
 
-const getDialog = () => ({
+const thebelabConfig = {
+  binderOptions: {
+    repo: 'binder-examples/requirements',
+    binderUrl: 'https://mybinder.org',
+  },
+  kernelOptions: {
+    name: 'python3',
+  },
+
+  // this will speed up the process
+  requestKernel: true,
+};
+
+const dialogConfig = () => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
   minWidth: 400,
+  onShow() {
+    activateThebelab(thebelabConfig);
+  },
   contents: [
     {
       id: 'tab-basic',
@@ -31,10 +49,13 @@ const getDialog = () => ({
           default: 'Python 3',
         },
         {
-          type: 'textarea',
-          id: 'message',
-          label: 'Edit script',
-          default: 'print("hello, world")',
+          type: 'html',
+          html: `
+            <label>Edit script:</label>
+            <pre data-executable="true">
+              print('Hello world!')
+            </pre>
+          `,
         },
       ],
     },
@@ -44,14 +65,14 @@ const getDialog = () => ({
 const loadPlugin = () => {
   CKEDITOR.plugins.add('enableBinder', {
     init: (editor) => {
-      editor.addCommand('openDialog', new CKEDITOR.dialogCommand('OpenDialog'));
+      editor.addCommand('openDialog', new CKEDITOR.dialogCommand('binderDialog'));
       editor.ui.addButton('enableBinder', {
         label: 'Enable Binder',
         command: 'openDialog',
         toolbar: 'insert',
         icon: 'https://binderhub.readthedocs.io/en/latest/_static/favicon.png',
       });
-      CKEDITOR.dialog.add('OpenDialog', getDialog);
+      CKEDITOR.dialog.add('binderDialog', dialogConfig);
     },
   });
 
