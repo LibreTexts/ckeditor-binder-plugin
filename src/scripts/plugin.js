@@ -14,16 +14,46 @@ const insertPreWithBinder = (editor) => {
   editor.insertElement(element);
 };
 
+const getDialog = () => {
+  return {
+    title: 'Insert Interactive Script',
+    minHeight: 100,
+    minWidth: 400,
+    contents: [
+      {
+        id: 'tab-basic',
+        label: 'Basic Settings',
+        elements: [
+          {
+            type: 'select',
+            id: 'language',
+            label: 'Select language for page:',
+            items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
+            'default': 'Python 3',
+          },
+          {
+            type: 'textarea',
+            id: 'message',
+            label: 'Edit script',
+            'default': 'print("hello, world")',
+          },
+        ],
+      },
+    ],
+  };
+};
+
 const loadPlugin = () => {
   CKEDITOR.plugins.add('enableBinder', {
     init: (editor) => {
-      editor.addCommand('insertPreWithBinder', { exec: insertPreWithBinder });
+      editor.addCommand('openDialog', new CKEDITOR.dialogCommand('OpenDialog'));
       editor.ui.addButton('enableBinder', {
         label: 'Enable Binder',
-        command: 'insertPreWithBinder',
-        toolbar: 'editing',
+        command: 'openDialog',
+        toolbar: 'insert',
         icon: 'https://binderhub.readthedocs.io/en/latest/_static/favicon.png',
       });
+      CKEDITOR.dialog.add('OpenDialog', getDialog);
     },
   });
 
