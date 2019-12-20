@@ -1,6 +1,6 @@
+const Path = require('path');
 const Webpack = require('webpack');
 const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const common = require('./webpack.common.js');
 
 module.exports = merge(common, {
@@ -8,6 +8,10 @@ module.exports = merge(common, {
   devtool: 'source-map',
   stats: 'errors-only',
   bail: true,
+  entry: {
+    app: Path.resolve(__dirname, '../src/scripts/index.js'),
+    plugin: Path.resolve(__dirname, '../src/scripts/plugin.js'),
+  },
   output: {
     filename: 'js/[name].[chunkhash:8].js',
     chunkFilename: 'js/[name].[chunkhash:8].chunk.js'
@@ -17,9 +21,6 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new Webpack.optimize.ModuleConcatenationPlugin(),
-    new MiniCssExtractPlugin({
-      filename: 'bundle.css'
-    })
   ],
   module: {
     rules: [
@@ -31,9 +32,9 @@ module.exports = merge(common, {
       {
         test: /\.s?css/i,
         use : [
-          MiniCssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
-          'sass-loader'
+          'sass-loader',
         ]
       }
     ]
