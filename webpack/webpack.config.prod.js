@@ -9,7 +9,6 @@ module.exports = merge(common, {
   stats: 'errors-only',
   bail: true,
   entry: {
-    app: Path.resolve(__dirname, '../src/scripts/index.js'),
     plugin: Path.resolve(__dirname, '../src/scripts/plugin.js'),
   },
   output: {
