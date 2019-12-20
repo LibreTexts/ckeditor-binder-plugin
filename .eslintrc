@@ -8,4 +8,12 @@
     "CKEDITOR": "readable",
     "thebelab": "readable",
   },
+  "rules": {
+    "new-cap": [
+      "error",
+      "newIsCapExceptions": [
+        "CKEDITOR.dialogCommand",
+      ],
+    ],
+  },
 }

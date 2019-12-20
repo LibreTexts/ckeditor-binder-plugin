@@ -14,34 +14,32 @@ const insertPreWithBinder = (editor) => {
   editor.insertElement(element);
 };
 
-const getDialog = () => {
-  return {
-    title: 'Insert Interactive Script',
-    minHeight: 100,
-    minWidth: 400,
-    contents: [
-      {
-        id: 'tab-basic',
-        label: 'Basic Settings',
-        elements: [
-          {
-            type: 'select',
-            id: 'language',
-            label: 'Select language for page:',
-            items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
-            'default': 'Python 3',
-          },
-          {
-            type: 'textarea',
-            id: 'message',
-            label: 'Edit script',
-            'default': 'print("hello, world")',
-          },
-        ],
-      },
-    ],
-  };
-};
+const getDialog = () => ({
+  title: 'Insert Interactive Script',
+  minHeight: 100,
+  minWidth: 400,
+  contents: [
+    {
+      id: 'tab-basic',
+      label: 'Basic Settings',
+      elements: [
+        {
+          type: 'select',
+          id: 'language',
+          label: 'Select language for page:',
+          items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
+          default: 'Python 3',
+        },
+        {
+          type: 'textarea',
+          id: 'message',
+          label: 'Edit script',
+          default: 'print("hello, world")',
+        },
+      ],
+    },
+  ],
+});
 
 const loadPlugin = () => {
   CKEDITOR.plugins.add('enableBinder', {
