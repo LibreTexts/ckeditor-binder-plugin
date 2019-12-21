@@ -9,7 +9,7 @@ module.exports = merge(common, {
   stats: 'errors-only',
   bail: true,
   entry: {
-    plugin: Path.resolve(__dirname, '../src/scripts/plugin.js'),
+    registerPlugin: Path.resolve(__dirname, '../src/scripts/registerPlugin.js'),
   },
   output: {
     filename: 'js/[name].[chunkhash:8].js',

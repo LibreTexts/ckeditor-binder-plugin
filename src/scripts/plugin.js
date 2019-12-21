@@ -14,14 +14,20 @@ const insertPreWithBinder = (editor) => {
   editor.insertElement(element);
 };
 
-CKEDITOR.plugins.add('enableBinder', {
-  init: (editor) => {
-    editor.addCommand('insertPreWithBinder', { exec: insertPreWithBinder });
-    editor.ui.addButton('enableBinder', {
-      label: 'Enable Binder',
-      command: 'insertPreWithBinder',
-      toolbar: 'editing',
-      icon: 'https://binderhub.readthedocs.io/en/latest/_static/favicon.png',
-    });
-  },
-});
+const loadPlugin = () => {
+  CKEDITOR.plugins.add('enableBinder', {
+    init: (editor) => {
+      editor.addCommand('insertPreWithBinder', { exec: insertPreWithBinder });
+      editor.ui.addButton('enableBinder', {
+        label: 'Enable Binder',
+        command: 'insertPreWithBinder',
+        toolbar: 'editing',
+        icon: 'https://binderhub.readthedocs.io/en/latest/_static/favicon.png',
+      });
+    },
+  });
+
+  CKEDITOR.config.extraPlugins = 'enableBinder';
+};
+
+export default loadPlugin;

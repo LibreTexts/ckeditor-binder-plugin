@@ -6,13 +6,9 @@ import 'ckeditor4';
 
 // this should be ran on every page
 import activateThebelab from './activateThebelab';
+import loadPlugin from './plugin';
 
-// plugin registration
-import './plugin';
-
-CKEDITOR.config.extraPlugins = 'enableBinder';
-// plugin registraion end
-
+loadPlugin();
 CKEDITOR.replace('editor');
 
 const thebelabConfig = {
