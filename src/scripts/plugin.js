@@ -29,7 +29,7 @@ const thebelabConfig = {
   requestKernel: true,
 };
 
-const dialogConfig = () => ({
+const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
   minWidth: 400,
@@ -50,6 +50,7 @@ const dialogConfig = () => ({
         },
         {
           type: 'html',
+          id: 'code',
           html: `
             <label>Edit script:</label>
             <pre data-executable="true">
@@ -60,6 +61,29 @@ const dialogConfig = () => ({
       ],
     },
   ],
+  onOk() {
+    const dialog = this;
+    const languageDictionary = {
+      'Python 3': ['python'],
+      Julia: ['julia'],
+      R: ['R'],
+      Octave: ['octave'],
+    };
+    const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
+
+    // creates code block to be inserted into text editor
+    const codeBlock = editor.document.createElement('pre');
+    codeBlock.setAttribute('data-executable', 'true');
+    codeBlock.setAttribute('data-language', language);
+    const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
+    const code = cm.getValue();
+    codeBlock.setText(code);
+    editor.insertElement(codeBlock);
+
+    // Clears the code output in dialog
+    cm.setValue('');
+    document.querySelector('.cke_dialog_contents .thebelab-run-button').click();
+  },
 });
 
 const loadPlugin = () => {

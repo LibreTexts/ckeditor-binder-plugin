@@ -1,5 +1,5 @@
 const loadThebelabScript = () => new Promise((resolve, reject) => {
-  if (window.thebelab !== undefined) return;
+  if (window.thebelab !== undefined) resolve();
 
   const script = document.createElement('script');
 
