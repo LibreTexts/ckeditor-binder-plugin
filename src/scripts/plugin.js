@@ -56,6 +56,9 @@ const dialogConfig = (editor) => ({
             <pre data-executable="true">
               print('Hello world!')
             </pre>
+            <div data-output="true">
+              Hello world!
+            </div>
           `,
         },
       ],
@@ -79,6 +82,22 @@ const dialogConfig = (editor) => ({
     const code = cm.getValue();
     codeBlock.setText(code);
     editor.insertElement(codeBlock);
+
+    // create output block
+    let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+    if (output) {
+      // the output will contain a pre tag if run by binder
+      if (output.children.length !== 0 && output.children[0].tagName === 'PRE') {
+        output = output.children[0].innerHTML;
+      } else {
+        output = output.innerHTML;
+      }
+
+      const outputBlock = editor.document.createElement('div');
+      outputBlock.setAttribute('data-output', 'true');
+      outputBlock.setText(output);
+      editor.insertElement(outputBlock);
+    }
 
     // Clears the code output in dialog
     cm.setValue('print(\'Hello world!\')');
