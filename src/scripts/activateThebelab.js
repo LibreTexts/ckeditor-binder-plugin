@@ -10,12 +10,60 @@ const loadThebelabScript = () => new Promise((resolve, reject) => {
   document.head.appendChild(script);
 });
 
-const activateThebelab = (config) => {
+const binderUrl = 'https://mybinder.org';
+
+const defaultConfig = {
+  binderOptions: {
+    repo: 'binder-examples/requirements',
+    binderUrl,
+  },
+};
+
+const getLanguage = () => {
+  const element = document.querySelector('[data-executable=true]');
+  let language = 'python3';
+
+  if (element !== null) {
+    const dataLanguage = element.getAttribute('data-language');
+    if (dataLanguage && dataLanguage !== '') language = dataLanguage;
+  }
+
+  return language;
+};
+
+const getConfig = (language) => {
+  const config = {
+    binderOptions: {
+      repo: 'binder-examples/requirements',
+      binderUrl,
+    },
+  };
+
+  switch (language) {
+    case 'R':
+      config.binderOptions.repo = 'binder-examples/r';
+      config.kernelOptions.kernelName = 'ir';
+      break;
+    case 'python3':
+    default:
+  }
+
+  return config;
+};
+
+const activateThebelab = (config, detectLanguage = true) => {
+  let mergeConfig = config;
+  if (!mergeConfig) mergeConfig = defaultConfig;
+
   // check if any pre block with data-executable=true
   if (document.querySelector('[data-executable=true]') !== null) {
+    if (detectLanguage) {
+      mergeConfig = Object.assign(mergeConfig, getConfig(getLanguage()));
+    }
+
     loadThebelabScript()
       .then(() => {
-        thebelab.bootstrap(config);
+        thebelab.bootstrap(mergeConfig);
       })
       .catch(() => {
         // todo: deal with error handling

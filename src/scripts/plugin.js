@@ -1,14 +1,6 @@
 import activateThebelab from './activateThebelab';
 
 const thebelabConfig = {
-  binderOptions: {
-    repo: 'binder-examples/requirements',
-    binderUrl: 'https://mybinder.org',
-  },
-  kernelOptions: {
-    name: 'python3',
-  },
-
   // this will speed up the process
   requestKernel: true,
 };
