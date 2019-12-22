@@ -1,4 +1,5 @@
-import loadPlugin from './plugin.js'
+import loadPlugin from './plugin.js';
+import activateThebelab from './activateThebelab';
 
 // Select the node that will be observed for mutations
 const targetNode = document.getElementsByTagName('head')[0];
@@ -7,9 +8,10 @@ const targetNode = document.getElementsByTagName('head')[0];
 const config = { attributes: false, childList: true, subtree: false };
 
 // Callback function to execute when mutations are observed
-const callback = function(mutationsList, observer) {
-  // Use traditional 'for loops' for IE 11
-  for(let mutation of mutationsList) {
+const callback = (mutationsList, observer) => {
+  for(let i = 0; i < mutationsList.length; i++) {
+    const mutation = mutationsList[i];
+
     if (mutation.addedNodes.length === 0) continue;
     const node = mutation.addedNodes[0];
 
@@ -27,3 +29,6 @@ const observer = new MutationObserver(callback);
 
 // Start observing the target node for configured mutations
 observer.observe(targetNode, config);
+
+// activate thebelab on every page if data-executable exists
+$(document).ready(() => { activateThebelab() });
