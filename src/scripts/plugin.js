@@ -81,7 +81,7 @@ const dialogConfig = (editor) => ({
     editor.insertElement(codeBlock);
 
     // Clears the code output in dialog
-    cm.setValue('');
+    cm.setValue('print(\'Hello world!\')');
     document.querySelector('.cke_dialog_contents .thebelab-run-button').click();
   },
 });
