@@ -37,9 +37,24 @@ const getConfig = (language) => {
       repo: 'binder-examples/requirements',
       binderUrl,
     },
+    kernelOptions: {
+      kernelName: 'python3',
+    },
   };
 
   switch (language) {
+    case 'SageMath':
+      config.binderOptions.repo = 'sagemath/sage-binder-env';
+      config.kernelOptions.kernelName = 'sagemath';
+      break;
+    case 'julia':
+      config.binderOptions.repo = 'binder-examples/demo-julia';
+      config.kernelOptions.kernelName = 'julia-1.1';
+      break;
+    case 'octave':
+      config.binderOptions.repo = 'binder-examples/octave';
+      config.kernelOptions.kernelName = 'octave';
+      break;
     case 'R':
       config.binderOptions.repo = 'binder-examples/r';
       config.kernelOptions.kernelName = 'ir';

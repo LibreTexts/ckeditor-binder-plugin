@@ -5,6 +5,51 @@ const thebelabConfig = {
   requestKernel: true,
 };
 
+const languageDictionary = {
+  'Python 3': ['python3'],
+  Julia: ['julia'],
+  R: ['R'],
+  Octave: ['octave'],
+  SageMath: ['SageMath'],
+};
+
+const editScriptAreaHTML = (language = 'python3') => {
+  const sample = {
+    python3: {
+      code: 'print(\'Hello world!\')',
+      output: 'Hello world!',
+    },
+    R: {
+      code: 'print(\'Hello world!\')',
+      output: '[1] "Hello world!"',
+    },
+    julia: {
+      code: 'println("Hello world!")',
+      output: 'Hello world!',
+    },
+    octave: {
+      code: 'printf(\'Hello world!\')',
+      output: 'Hello world! Hello world!',
+    },
+    SageMath: {
+      code: 'print(\'Hello world!\')',
+      output: 'Hello world!',
+    },
+  };
+
+  if (sample[language] === undefined) return 'Error!';
+
+  return `
+    <label>Edit script:</label>
+    <pre data-executable="true" data-language=${language}>
+      ${sample[language].code}
+    </pre>
+    <div data-output="true">
+      ${sample[language].output}
+    </div>
+  `;
+};
+
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
@@ -23,31 +68,22 @@ const dialogConfig = (editor) => ({
           label: 'Select language for page:',
           items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
           default: 'Python 3',
+          onChange() {
+            const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
+            element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+            activateThebelab(thebelabConfig);
+          },
         },
         {
           type: 'html',
           id: 'code',
-          html: `
-            <label>Edit script:</label>
-            <pre data-executable="true">
-              print('Hello world!')
-            </pre>
-            <div data-output="true">
-              Hello world!
-            </div>
-          `,
+          html: editScriptAreaHTML(),
         },
       ],
     },
   ],
   onOk() {
     const dialog = this;
-    const languageDictionary = {
-      'Python 3': ['python'],
-      Julia: ['julia'],
-      R: ['R'],
-      Octave: ['octave'],
-    };
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
 
     // creates code block to be inserted into text editor
