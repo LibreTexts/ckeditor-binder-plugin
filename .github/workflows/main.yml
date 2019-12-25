@@ -11,7 +11,7 @@ jobs:
       with:
         args: --acl public-read
       env:
-        SOURCE_DIR: './public'
+        SOURCE_DIR: './webpack'
         DEST_DIR: 'production'
         SPACE_NAME: ${{ secrets.Spaces_Name }}
         SPACE_REGION: ${{ secrets.Spaces_Region}}
