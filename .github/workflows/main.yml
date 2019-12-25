@@ -1,17 +1,23 @@
 name: Sync to DigitalOcean Spaces
 
-on: [push]
+on: 
+  push:
+    branches: 
+      - master
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - uses: LibreTexts/do-space-sync-action@master
+    - name: Building repo using Webpack
+      run:  yarn build
+    - name: Sending to DigitalOcean
+      uses: LibreTexts/do-space-sync-action@master
       with:
         args: --acl public-read
       env:
-        SOURCE_DIR: './webpack'
+        SOURCE_DIR: './build'
         DEST_DIR: 'github/ckeditor-binder-plugin'
         SPACE_NAME: ${{ secrets.Spaces_Name }}
         SPACE_REGION: ${{ secrets.Spaces_Region}}
