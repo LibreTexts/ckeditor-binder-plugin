@@ -79,36 +79,63 @@ const dialogConfig = (editor) => ({
           id: 'code',
           html: editScriptAreaHTML(),
         },
+        {
+          type: 'hbox',
+          id: 'checkboxes',
+          widths: ['25%', '25%', '50%'],
+          children: [
+            {
+              type: 'checkbox',
+              id: 'no-output',
+              label: 'Insert without output',
+            },
+            {
+              type: 'checkbox',
+              id: 'no-code',
+              label: 'Insert with code hidden',
+            },
+            {
+              type: 'html',
+              html: '',
+            },
+          ],
+        },
       ],
     },
   ],
   onOk() {
     const dialog = this;
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
-
-    // creates code block to be inserted into text editor
-    const codeBlock = editor.document.createElement('pre');
-    codeBlock.setAttribute('data-executable', 'true');
-    codeBlock.setAttribute('data-language', language);
+    const noOutput = dialog.getValueOf('tab-basic', 'no-output');
+    const noCode = dialog.getValueOf('tab-basic', 'no-code');
     const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
     const code = cm.getValue();
-    codeBlock.setText(code);
-    editor.insertElement(codeBlock);
+
+    // creates code block to be inserted into text editor
+    if (!noCode) {
+      const codeBlock = editor.document.createElement('pre');
+      codeBlock.setAttribute('data-executable', 'true');
+      codeBlock.setAttribute('data-language', language);
+      codeBlock.setText(code);
+      editor.insertElement(codeBlock);
+    }
 
     // create output block
-    let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
-    if (output) {
-      // the output will contain a pre tag if run by binder
-      if (output.children.length !== 0 && output.children[0].tagName === 'PRE') {
-        output = output.children[0].innerHTML;
-      } else {
-        output = output.innerHTML;
-      }
+    if (!noOutput) {
+      let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+      if (output) {
+        // the output will contain a pre tag if run by binder
+        if (output.children.length !== 0 && output.children[0].tagName === 'PRE') {
+          output = output.children[0].innerHTML;
+        } else {
+          output = output.innerHTML;
+        }
 
-      const outputBlock = editor.document.createElement('div');
-      outputBlock.setAttribute('data-output', 'true');
-      outputBlock.setText(output);
-      editor.insertElement(outputBlock);
+        const outputBlock = editor.document.createElement('div');
+        outputBlock.setAttribute('data-output', 'true');
+        outputBlock.setText(output);
+        editor.insertElement(outputBlock);
+      }
     }
 
     // Clears the code output in dialog
