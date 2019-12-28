@@ -133,7 +133,7 @@ const dialogConfig = (editor) => ({
 
         const outputBlock = editor.document.createElement('div');
         outputBlock.setAttribute('data-output', 'true');
-        outputBlock.setText(output);
+        outputBlock.setHtml(output);
         editor.insertElement(outputBlock);
       }
     }
