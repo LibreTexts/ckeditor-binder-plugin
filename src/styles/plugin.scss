@@ -4,3 +4,19 @@
   background-position: 0 0px !important;
   background-size: 16px !important;
 }
+
+// fix dialog scroll
+.cke_editor_editarea_dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cke_dialog {
+    position: static !important;
+
+    .cke_dialog_contents_body {
+      display: block;
+      width: 100% !important;
+    }
+  }
+}
