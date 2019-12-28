@@ -14,42 +14,18 @@ const languageDictionary = {
   SageMath: ['SageMath'],
 };
 
-const editScriptAreaHTML = (language = 'python3') => {
-  const sample = {
-    python3: {
-      code: 'print(\'Hello world!\')',
-      output: 'Hello world!',
-    },
-    R: {
-      code: 'print(\'Hello world!\')',
-      output: '[1] "Hello world!"',
-    },
-    julia: {
-      code: 'println("Hello world!")',
-      output: 'Hello world!',
-    },
-    octave: {
-      code: 'printf(\'Hello world!\')',
-      output: 'Hello world! Hello world!',
-    },
-    SageMath: {
-      code: 'print(\'Hello world!\')',
-      output: 'Hello world!',
-    },
-  };
+const editScriptAreaHTML = (language = 'python3', code = null, output = null) => (`
+  <label>Edit script:</label>
+  <pre data-executable="true" data-language=${language}>
+    ${code === null ? 'print(\'Hello world!\')' : code}
+  </pre>
+  <div data-output="true">
+    ${output === null ? 'Hello world!' : output}
+  </div>
+`);
 
-  if (sample[language] === undefined) return 'Error!';
-
-  return `
-    <label>Edit script:</label>
-    <pre data-executable="true" data-language=${language}>
-      ${sample[language].code}
-    </pre>
-    <div data-output="true">
-      ${sample[language].output}
-    </div>
-  `;
-};
+const getOutputElement = () => document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+const getCodeMirror = () => document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
 
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
@@ -71,7 +47,14 @@ const dialogConfig = (editor) => ({
           default: 'Python 3',
           onChange() {
             const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
-            element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+            element.setHtml(
+              editScriptAreaHTML(
+                languageDictionary[this.getValue()],
+                getCodeMirror().getValue(),
+                getOutputElement().innerHTML,
+              ),
+            );
+
             activateThebelab(thebelabConfig);
           },
         },
@@ -109,7 +92,7 @@ const dialogConfig = (editor) => ({
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
     const noOutput = dialog.getValueOf('tab-basic', 'no-output');
     const noCode = dialog.getValueOf('tab-basic', 'no-code');
-    const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
+    const cm = getCodeMirror();
     const code = cm.getValue();
 
     // creates code block to be inserted into text editor
@@ -123,7 +106,7 @@ const dialogConfig = (editor) => ({
 
     // create output block
     if (!noOutput) {
-      let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+      let output = getOutputElement();
       if (output) {
         // the output will contain a pre tag if run by binder
         if (output.children.length !== 0 && output.children[0].tagName === 'PRE') {
