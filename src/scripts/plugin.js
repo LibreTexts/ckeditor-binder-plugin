@@ -1,3 +1,4 @@
+import '../styles/plugin.scss';
 import activateThebelab from './activateThebelab';
 
 const thebelabConfig = {
