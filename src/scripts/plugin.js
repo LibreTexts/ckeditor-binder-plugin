@@ -159,7 +159,11 @@ const loadPlugin = () => {
     },
   });
 
-  CKEDITOR.config.extraPlugins = 'enableBinder';
+  if (CKEDITOR.config.extraPlugins === '') {
+    CKEDITOR.config.extraPlugins += 'enableBinder';
+  } else {
+    CKEDITOR.config.extraPlugins += ',enableBinder';
+  }
 };
 
 export default loadPlugin;
