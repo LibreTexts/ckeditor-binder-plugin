@@ -1,0 +1,14 @@
+name: Run ESlint
+
+on: push
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+    - name: Building repo using Webpack
+      run: yarn install
+    - name: Run ESlint
+      run: yarn lint
