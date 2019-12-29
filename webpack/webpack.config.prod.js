@@ -1,9 +1,8 @@
 const Path = require('path');
 const Webpack = require('webpack');
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
-module.exports = merge(common, {
+module.exports = {
   mode: 'production',
   devtool: 'source-map',
   stats: 'errors-only',
@@ -12,30 +11,50 @@ module.exports = merge(common, {
     registerPlugin: Path.resolve(__dirname, '../src/scripts/registerPlugin.js'),
   },
   output: {
-    filename: 'js/[name].[chunkhash:8].js',
-    chunkFilename: 'js/[name].[chunkhash:8].chunk.js'
+    path: Path.join(__dirname, '../build'),
+    filename: 'js/[name].min.js',
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new Webpack.optimize.ModuleConcatenationPlugin(),
   ],
+  resolve: {
+    alias: {
+      '~': Path.resolve(__dirname, '../src'),
+    },
+  },
   module: {
     rules: [
       {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: 'javascript/auto',
+      },
+      {
+        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+        use: {
+          loader: 'file-loader',
+          options: {
+            name: '[path][name].[ext]',
+          },
+        },
+      },
+      {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'babel-loader',
       },
       {
         test: /\.s?css/i,
-        use : [
+        use: [
           'style-loader',
           'css-loader',
           'sass-loader',
-        ]
-      }
-    ]
-  }
-});
+        ],
+      },
+    ],
+  },
+};
