@@ -89,11 +89,27 @@ const dialogConfig = (editor) => ({
               type: 'checkbox',
               id: 'no-output',
               label: 'Insert without output',
+              onClick() {
+                const noCode = this.getDialog().getContentElement('tab-basic', 'no-code');
+                if (this.getValue()) {
+                  noCode.disable();
+                } else {
+                  noCode.enable();
+                }
+              },
             },
             {
               type: 'checkbox',
               id: 'no-code',
               label: 'Insert with code hidden',
+              onClick() {
+                const noOutput = this.getDialog().getContentElement('tab-basic', 'no-output');
+                if (this.getValue()) {
+                  noOutput.disable();
+                } else {
+                  noOutput.enable();
+                }
+              },
             },
             {
               type: 'html',
