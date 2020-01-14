@@ -25,11 +25,11 @@ const dataLanguageDictionary = {
 const getLanguage = (editor) => {
   const blockList = editor.document.getElementsByTag('pre');
   let language = 'Python 3';
-  if(blockList.count() != 0) {
+  if (blockList.count() !== 0) {
     language = dataLanguageDictionary[blockList.getItem(0).getAttribute('data-language')];
   }
   return language;
-}
+};
 
 const editScriptAreaHTML = (language = 'python3') => {
   const sample = {
@@ -71,11 +71,10 @@ const editScriptAreaHTML = (language = 'python3') => {
 const changeAllLanguages = (editor, language = 'python3') => {
   // changes the data-language attribute of all pre tags
   const blockList = editor.document.getElementsByTag('pre');
-  let i = 0;
-  for(i = 0; i < blockList.count(); i++) {
-    blockList.getItem(i).setAttribute('data-language', language);
-  }
-}
+  blockList.toArray().forEach((codeBlock) => {
+    codeBlock.setAttribute('data-language', language);
+  });
+};
 
 const insertWarning = () => `
     <label class="warning"> Please do not click OK until code has finished executing. </label>`;
@@ -89,8 +88,15 @@ const dialogConfig = (editor) => ({
     const dialog = this;
     const language = getLanguage(editor);
     dialog.setValueOf('tab-basic', 'language', language);
-    activateThebelab(thebelabConfig);
     this.resize(500, 500);
+  },
+  onCancel() {
+    const dialog = this;
+    const editorLanguage = getLanguage(editor);
+    const dialogLanguage = dialog.getValueOf('tab-basic', 'language');
+    if (editorLanguage !== dialogLanguage) {
+      activateThebelab(thebelabConfig);
+    }
   },
   contents: [
     {
@@ -152,11 +158,6 @@ const dialogConfig = (editor) => ({
     // changes the data-language attributes of all pre tags in editor
     changeAllLanguages(editor, language);
 
-    // creates code block to be inserted into text editor
-    const codeBlock = editor.document.createElement('pre');
-    codeBlock.setAttribute('class', 'code_input');
-    codeBlock.setAttribute('data-executable', 'true');
-    codeBlock.setAttribute('data-language', language);
     const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
     const code = cm.getValue();
 
