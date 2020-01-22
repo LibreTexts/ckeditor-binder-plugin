@@ -57,6 +57,7 @@ const dialogConfig = (editor) => ({
   minWidth: 400,
   onShow() {
     activateThebelab(thebelabConfig);
+    this.resize(500, 500);
   },
   contents: [
     {
