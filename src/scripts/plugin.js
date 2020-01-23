@@ -25,8 +25,13 @@ const dataLanguageDictionary = {
 const getLanguage = (editor) => {
   const blockList = editor.document.getElementsByTag('pre');
   let language = 'Python 3';
-  if (blockList.count() !== 0) {
-    language = dataLanguageDictionary[blockList.getItem(0).getAttribute('data-language')];
+  let i = 0;
+  for (i = 0; i < blockList.count(); i += 1) {
+    const codeBlock = (blockList.toArray())[i];
+    if (codeBlock.getAttribute('data-language')) {
+      language = dataLanguageDictionary[codeBlock.getAttribute('data-language')];
+      break;
+    }
   }
   return language;
 };
@@ -72,7 +77,9 @@ const changeAllLanguages = (editor, language = 'python3') => {
   // changes the data-language attribute of all pre tags
   const blockList = editor.document.getElementsByTag('pre');
   blockList.toArray().forEach((codeBlock) => {
-    codeBlock.setAttribute('data-language', language);
+    if (codeBlock.getAttribute('data-language')) {
+      codeBlock.setAttribute('data-language', language);
+    }
   });
 };
 
