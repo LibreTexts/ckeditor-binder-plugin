@@ -51,6 +51,10 @@ const editScriptAreaHTML = (language = 'python3') => {
   `;
 };
 
+const insertWarning = () => `
+    <label class="warning"> Please do not click OK until code has finished executing. </label>`;
+
+
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
@@ -101,6 +105,11 @@ const dialogConfig = (editor) => ({
               html: '',
             },
           ],
+        },
+        {
+          type: 'html',
+          id: 'insert-warning',
+          html: insertWarning(),
         },
       ],
     },
