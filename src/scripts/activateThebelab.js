@@ -34,7 +34,7 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'binder-examples/requirements',
+      repo: 'jupyter-widgets/ipyleaflet',
       binderUrl,
     },
     kernelOptions: {
