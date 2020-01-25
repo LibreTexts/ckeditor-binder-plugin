@@ -1,0 +1,48 @@
+name: python-environment 
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6.*
+  - ipywidgets
+  - ipympl
+  - pythreejs
+  - ipyleaflet
+  - resonance
+  - opty
+  - pandas
+  - pydy
+  - numexpr
+  - matplotlib
+  - nodejs
+  - scipy
+  - seaborn
+  - scikit-learn
+  - scikit-image
+  - sympy
+  - cython
+  - numba
+  - bokeh
+  - numpy
+  - astropy
+  - bqplot
+  - nb_conda_kernels
+  - statsmodels
+  - patsy
+  - requests
+  - cloudpickle
+  - dill
+  - dask
+  - sqlalchemy*
+  - hdf5
+  - h5py
+  - vincent
+  - beautifulsoup4
+  - protobuf
+  - xlrd
+  - numba
+  - gnuplot
+  - ghostscript
+  - rpy2
+
+
+
