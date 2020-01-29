@@ -34,7 +34,8 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'binder-examples/requirements',
+      repo: 'LibreTexts/ckeditor-binder-plugin',
+      ref: 'Python-Env'
       binderUrl,
     },
     kernelOptions: {
