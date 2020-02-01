@@ -1,0 +1,15 @@
+.columbia-skin-elm {
+  .cke_dialog {
+    .cke_dialog_contents {
+      tbody {
+        tr {
+          td {
+            display: block;
+            overflow: auto;
+            width: 100% !important;
+          }
+        }
+      }
+    }
+  }
+}
