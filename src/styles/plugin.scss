@@ -10,7 +10,7 @@
     .cke_dialog_contents {
       tbody {
         tr {
-          td {
+          td.cke_dialog_contents_body {
             display: block;
             overflow: auto;
             width: 100% !important;
