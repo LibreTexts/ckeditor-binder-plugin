@@ -4,3 +4,21 @@
   background-position: 0 0px !important;
   background-size: 16px !important;
 }
+
+.columbia-skin-elm {
+  .cke_dialog {
+    .cke_dialog_contents {
+      tbody {
+        tr {
+          td.cke_dialog_contents_body {
+            display: block;
+            overflow: auto;
+            width: 100% !important;
+            max-height: 60vh;
+          }
+        }
+      }
+    }
+  }
+}
+
