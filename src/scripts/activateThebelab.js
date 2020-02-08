@@ -21,7 +21,7 @@ const defaultConfig = {
 
 const getLanguage = () => {
   const element = document.querySelector('[data-executable=true]');
-  let language = 'python3';
+  let language = 'python';
 
   if (element !== null) {
     const dataLanguage = element.getAttribute('data-language');
@@ -39,7 +39,7 @@ const getConfig = (language) => {
       binderUrl,
     },
     kernelOptions: {
-      kernelName: 'python3',
+      kernelName: 'python',
     },
   };
 
@@ -64,7 +64,7 @@ const getConfig = (language) => {
       config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'ir';
       break;
-    case 'python3':
+    case 'python':
     default:
   }
 
