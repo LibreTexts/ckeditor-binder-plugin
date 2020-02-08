@@ -9,15 +9,15 @@ const thebelabConfig = {
 const languageDictionary = {
   'Python 3': ['python'],
   Julia: ['julia'],
-  R: ['R'],
+  r: ['R'],
   Octave: ['octave'],
-  SageMath: ['SageMath'],
+  sagemath: ['SageMath'],
 };
 
 const dataLanguageDictionary = {
   python: ['Python 3'],
   julia: ['Julia'],
-  R: ['R'],
+  r: ['R'],
   octave: ['Octave'],
   SageMath: ['SageMath'],
 };
