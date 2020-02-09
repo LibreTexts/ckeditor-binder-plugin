@@ -10,7 +10,7 @@ Ckeditor-binder-plugin is a [CKEditor](https://ckeditor.com/) plugin that allows
 
 When the plugin is registered, three UI components will be available on CKEditor: __enableBinder button__, __binderDialog__, and __thebelab widget__.
 
-> Image here shows all the components.
+![Image of the UI Components](image/UI-demonstartion.png)
 
 __EnableBinder button__: The button displayed on the toolbar that opens __binderDialog__ when clicked. It is registered via `editor.ui.addButton`.
 
@@ -22,7 +22,7 @@ __Thebelab widget__: The UI component that will be inserted to the editor. It co
 
 This section introduces the five components this plugin uses and how they interact with each other. The five components are: __CKEditor__, __Thebelab__, __Binderhub__, __Jupyterhub__, and __Jupyter notebook__.
 
-> A image here to explain the relationship between each component.
+![How Does it Work?](image/how-does-it-work.jpg)
 
 * __CKEditor__: An HTML editor that dominates the web world. Basically every online editor you've used is a distribution of it.
 * __Thebelab__: A JavaScript code that transforms specific HTML structures into executable code blocks.
