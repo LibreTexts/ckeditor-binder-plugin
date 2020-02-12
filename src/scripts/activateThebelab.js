@@ -35,7 +35,7 @@ const getConfig = (language) => {
   const config = {
     binderOptions: {
       repo: 'LibreTexts/ckeditor-binder-plugin',
-      ref: 'test_mplWid'
+      ref: 'test_mplWid',
       binderUrl,
     },
     kernelOptions: {
