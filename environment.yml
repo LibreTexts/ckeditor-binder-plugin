@@ -1,0 +1,16 @@
+name: python-environment 
+channels:
+  - conda-forge
+dependencies:
+  - python=3.6.*
+  - ipywidgets
+  - ipympl
+  - ipyleaflet
+  - matplotlib
+  - nodejs
+
+
+ 
+
+
+

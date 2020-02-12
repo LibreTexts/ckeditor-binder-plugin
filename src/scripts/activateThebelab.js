@@ -34,7 +34,8 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'jupyter-widgets/ipyleaflet',
+      repo: 'LibreTexts/ckeditor-binder-plugin',
+      ref: 'test_mplWid',
       binderUrl,
     },
     kernelOptions: {
