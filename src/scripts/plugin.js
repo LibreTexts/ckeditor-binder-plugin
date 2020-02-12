@@ -7,19 +7,19 @@ const thebelabConfig = {
 };
 
 const languageDictionary = {
-  'Python 3': ['python3'],
+  'Python 3': ['python'],
   Julia: ['julia'],
-  R: ['R'],
+  R: ['r'],
   Octave: ['octave'],
-  SageMath: ['SageMath'],
+  SageMath: ['sagemath'],
 };
 
 const dataLanguageDictionary = {
-  python3: ['Python 3'],
+  python: ['Python 3'],
   julia: ['Julia'],
-  R: ['R'],
+  r: ['R'],
   octave: ['Octave'],
-  SageMath: ['SageMath'],
+  sagemath: ['SageMath'],
 };
 
 const getLanguage = (editor) => {
@@ -36,13 +36,13 @@ const getLanguage = (editor) => {
   return language;
 };
 
-const editScriptAreaHTML = (language = 'python3') => {
+const editScriptAreaHTML = (language = 'python') => {
   const sample = {
-    python3: {
+    python: {
       code: 'print(\'Hello world!\')',
       output: 'Hello world!',
     },
-    R: {
+    r: {
       code: 'print(\'Hello world!\')',
       output: '[1] "Hello world!"',
     },
@@ -54,7 +54,7 @@ const editScriptAreaHTML = (language = 'python3') => {
       code: 'printf(\'Hello world!\')',
       output: 'Hello world! Hello world!',
     },
-    SageMath: {
+    sagemath: {
       code: 'print(\'Hello world!\')',
       output: 'Hello world!',
     },
@@ -73,7 +73,7 @@ const editScriptAreaHTML = (language = 'python3') => {
   `;
 };
 
-const changeAllLanguages = (editor, language = 'python3') => {
+const changeAllLanguages = (editor, language = 'python') => {
   // changes the data-language attribute of all pre tags
   const blockList = editor.document.getElementsByTag('pre');
   blockList.toArray().forEach((codeBlock) => {

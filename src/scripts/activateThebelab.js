@@ -21,7 +21,7 @@ const defaultConfig = {
 
 const getLanguage = () => {
   const element = document.querySelector('[data-executable=true]');
-  let language = 'python3';
+  let language = 'python';
 
   if (element !== null) {
     const dataLanguage = element.getAttribute('data-language');
@@ -39,12 +39,12 @@ const getConfig = (language) => {
       binderUrl,
     },
     kernelOptions: {
-      kernelName: 'python3',
+      kernelName: 'python',
     },
   };
 
   switch (language) {
-    case 'SageMath':
+    case 'sagemath':
       config.binderOptions.repo = 'sagemath/sage-binder-env';
       config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'sagemath';
@@ -59,12 +59,12 @@ const getConfig = (language) => {
       config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'octave';
       break;
-    case 'R':
+    case 'r':
       config.binderOptions.repo = 'binder-examples/r';
       config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'ir';
       break;
-    case 'python3':
+    case 'python':
     default:
   }
 
