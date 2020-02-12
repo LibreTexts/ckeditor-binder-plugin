@@ -17,7 +17,7 @@ const languageDictionary = {
 const dataLanguageDictionary = {
   python: ['Python 3'],
   julia: ['Julia'],
-  r: ['R'],
+  R: ['r'],
   octave: ['Octave'],
   SageMath: ['SageMath'],
 };
