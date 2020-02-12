@@ -11,15 +11,15 @@ const languageDictionary = {
   Julia: ['julia'],
   R: ['r'],
   Octave: ['octave'],
-  sagemath: ['SageMath'],
+  SageMath: ['sagemath'],
 };
 
 const dataLanguageDictionary = {
   python: ['Python 3'],
   julia: ['Julia'],
-  R: ['R'],
+  r: ['R'],
   octave: ['Octave'],
-  SageMath: ['SageMath'],
+  sagemath: ['SageMath'],
 };
 
 const getLanguage = (editor) => {
@@ -54,7 +54,7 @@ const editScriptAreaHTML = (language = 'python') => {
       code: 'printf(\'Hello world!\')',
       output: 'Hello world! Hello world!',
     },
-    SageMath: {
+    sagemath: {
       code: 'print(\'Hello world!\')',
       output: 'Hello world!',
     },
