@@ -9,7 +9,7 @@ const thebelabConfig = {
 const languageDictionary = {
   'Python 3': ['python'],
   Julia: ['julia'],
-  r: ['R'],
+  R: ['r'],
   Octave: ['octave'],
   sagemath: ['SageMath'],
 };
@@ -17,7 +17,7 @@ const languageDictionary = {
 const dataLanguageDictionary = {
   python: ['Python 3'],
   julia: ['Julia'],
-  R: ['r'],
+  R: ['R'],
   octave: ['Octave'],
   SageMath: ['SageMath'],
 };
@@ -42,7 +42,7 @@ const editScriptAreaHTML = (language = 'python') => {
       code: 'print(\'Hello world!\')',
       output: 'Hello world!',
     },
-    R: {
+    r: {
       code: 'print(\'Hello world!\')',
       output: '[1] "Hello world!"',
     },
