@@ -92,6 +92,15 @@ const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
   minWidth: 400,
+
+  // The dialog is showed when either the user wants
+  // to insert a new widget or edit a old widget.
+  // in the case where the user wants to edit a
+  // old widget, here we set the default value
+  // as the state of the widget.
+  // Note that when the user wants to insert a new
+  // widget, the widget is already initialized although
+  // it is not inserted yet.
   onShow() {
     const dialog = this;
     const language = getLanguage(editor);
@@ -182,6 +191,10 @@ const dialogConfig = (editor) => ({
       ],
     },
   ],
+
+  // As a dialog of a widget, the widget
+  // is inserted automaticly after this function.
+  // We only need to set the correct widget data.
   onOk() {
     const dialog = this;
     const widget = dialog.getModel(editor);

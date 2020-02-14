@@ -40,9 +40,18 @@ const template = `
 `.trim();
 
 const widgetConfig = {
+  // This sets `binderDialog` as the dialog related
+  // the dialog will appear when first trying to insert
+  // a widget (when the user clicks the button to insert).
+  // It will also appear when the user wants to edit
+  // the widget (the default trigger is by double clicking
+  // or pressing the button again when a widget is selected.
   dialog: 'binderDialog',
-  // data for widgets are not preversed when
-  // recasting, so need to reset the data
+
+  // Data for widgets are not preversed when
+  // recasting. For example if the user presses `source`
+  // and then come back, the editor will init a new widget.
+  // So we need to use the HTML element to reset the data.
   init() {
     const preTag = this.element.findOne('pre[data-executable=true]');
     this.setData('noCode', preTag === null);
@@ -58,6 +67,9 @@ const widgetConfig = {
     }
   },
   template,
+
+  // data is called whenever widget.data is changed.
+  // this is typically triggered by `this.setData()`
   data() {
     const { data, element } = this;
     element.setHtml(widgetHtml(data));
