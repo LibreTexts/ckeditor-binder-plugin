@@ -107,7 +107,9 @@ const dialogConfig = (editor) => ({
     dialog.setValueOf('tab-basic', 'language', language);
 
     // set code and output
-    const widget = dialog.getModel(editor);
+    // getModel is not supported on older versions
+    // const widget = dialog.getModel(editor);
+    const widget = window.currentEditedThebelabWidgetByBinderDialog;
     const preTag = widget.element.findOne('pre[data-executable]');
     let code = '';
     if (preTag) {
@@ -197,7 +199,11 @@ const dialogConfig = (editor) => ({
   // We only need to set the correct widget data.
   onOk() {
     const dialog = this;
-    const widget = dialog.getModel(editor);
+
+    // getModel is not supported on older versions
+    // const widget = dialog.getModel(editor);
+    const widget = window.currentEditedThebelabWidgetByBinderDialog;
+
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
 
     // changes the data-language attributes of all pre tags in editor
