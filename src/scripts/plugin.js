@@ -1,13 +1,21 @@
 import '../styles/plugin.scss';
-import dialogConfig from './dialog';
-import widgetConfig from './widget';
+import dialogConfig from './dialogConfig';
+import widgetConfig from './widgetConfig';
 
 const loadPlugin = () => {
   CKEDITOR.plugins.add('enableBinder', {
+    onLoad: () => {
+      // here we can add css to the editor
+      // we might consider extract it to another file
+      // and use raw-loader to get it
+      CKEDITOR.addCss(
+        '.thebelab pre.no-code { display: none; }',
+      );
+    },
     init: (editor) => {
       // not sure why allowedContent in the widgetConfig
       // won't work. So set it here
-      editor.filter.allow('div(thebelab);pre[data-executable,data-language];div[data-output]');
+      editor.filter.allow('div(thebelab);pre[data-executable,data-language](no-code);div[data-output]');
 
       CKEDITOR.dialog.add('binderDialog', dialogConfig);
       editor.widgets.add('thebelabWidget', widgetConfig);

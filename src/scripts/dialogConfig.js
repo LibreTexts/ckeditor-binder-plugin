@@ -110,13 +110,13 @@ const dialogConfig = (editor) => ({
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
     const widget = window.currentEditedThebelabWidgetByBinderDialog;
-    const preTag = widget.element.findOne('pre[data-executable]');
+    const preTag = widget.element.findOne('pre');
     let code = '';
     if (preTag) {
       code = preTag.getHtml();
-    } else {
+
       // set noCode to true
-      dialog.setValueOf('tab-basic', 'no-code', true);
+      if (preTag.hasClass('no-code')) dialog.setValueOf('tab-basic', 'no-code', true);
     }
 
     const outputTag = widget.element.findOne('div[data-output]');
