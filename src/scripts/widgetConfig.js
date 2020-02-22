@@ -1,3 +1,11 @@
+const codeHtml = (code, language, noCode = false) => {
+  if (noCode) {
+    return `<pre data-language="${language}" class="no-code">${code}</pre>`;
+  }
+
+  return `<pre data-executable="true" data-language="${language}">${code}</pre>`;
+};
+
 const widgetHtml = (data) => {
   const {
     code,
@@ -7,10 +15,6 @@ const widgetHtml = (data) => {
     noOutput,
   } = data;
 
-  const codeHtml = `
-    <pre data-executable="true" data-language="${language}">${code}</pre>
-   `;
-
   const outputHtml = `
     <div data-output="true">
       ${output}
@@ -18,10 +22,8 @@ const widgetHtml = (data) => {
   `;
 
   return `
-    <div class="thebelab">
-      ${noCode ? '' : codeHtml}
-      ${noOutput ? '' : outputHtml}
-    </div>
+    ${codeHtml(code, language, noCode)}
+    ${noOutput ? '' : outputHtml}
   `;
 };
 
@@ -53,9 +55,9 @@ const widgetConfig = {
   // and then come back, the editor will init a new widget.
   // So we need to use the HTML element to reset the data.
   init() {
-    const preTag = this.element.findOne('pre[data-executable=true]');
-    this.setData('noCode', preTag === null);
+    const preTag = this.element.findOne('pre');
     if (preTag) {
+      this.setData('noCode', preTag.hasClass('no-code'));
       this.setData('language', preTag.getAttribute('data-language'));
       this.setData('code', preTag.getHtml());
     }
