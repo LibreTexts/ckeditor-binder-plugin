@@ -34,7 +34,8 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'matplotlib/jupyter-matplotlib',
+      repo: 'LibreTexts/ckeditor-binder-plugin',
+      ref: 'test_mplWid'
       binderUrl,
     },
     kernelOptions: {
