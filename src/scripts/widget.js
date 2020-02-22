@@ -65,6 +65,15 @@ const widgetConfig = {
     if (outputDiv) {
       this.setData('output', outputDiv.getHtml());
     }
+
+    // every time each widget is edited, it should pass it to
+    // the dialog so that the dialog can access it. this is done
+    // in here https://github.com/ckeditor/ckeditor4/blob/master/plugins/widget/plugin.js#L1217
+    // However, it is not not supported on older versions
+    // here is a hack that attaches it as a global var
+    this.on('edit', () => {
+      window.currentEditedThebelabWidgetByBinderDialog = this;
+    });
   },
   template,
 
