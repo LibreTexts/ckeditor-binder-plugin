@@ -8,7 +8,7 @@ dependencies:
   - ipyleaflet
   - matplotlib
   - nodejs
-
+  - widgetsnbextension
 
  
 
