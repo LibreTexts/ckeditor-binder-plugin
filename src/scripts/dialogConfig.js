@@ -72,6 +72,9 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
   `;
 };
 
+const getOutputElement = () => document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+const getCodeMirror = () => document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
+
 const changeAllLanguages = (editor, language = 'python') => {
   // changes the data-language attribute of all pre tags
   const blockList = editor.document.getElementsByTag('pre');
@@ -154,7 +157,14 @@ const dialogConfig = (editor) => ({
           default: 'Python 3',
           onChange() {
             const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
-            element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+            // element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+            element.setHtml(
+              editScriptAreaHTML(
+                languageDictionary[this.getValue()];
+                getCodeMirror().getValue(),
+                getOutputElement().innerHTML,
+              ),
+            );
             activateThebelab(thebelabConfig);
           },
         },
@@ -211,7 +221,8 @@ const dialogConfig = (editor) => ({
 
     const noOutput = dialog.getValueOf('tab-basic', 'no-output');
     const noCode = dialog.getValueOf('tab-basic', 'no-code');
-    const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
+    const cm = getCodeMirror();
+    // const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
     // the output will contain a pre tag if run by binder
