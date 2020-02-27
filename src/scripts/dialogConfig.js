@@ -160,7 +160,7 @@ const dialogConfig = (editor) => ({
             // element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
             element.setHtml(
               editScriptAreaHTML(
-                languageDictionary[this.getValue()];
+                languageDictionary[this.getValue()],
                 getCodeMirror().getValue(),
                 getOutputElement().innerHTML,
               ),
