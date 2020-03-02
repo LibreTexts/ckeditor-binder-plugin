@@ -8,3 +8,4 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@^1.0.1
 jupyter labextension install @bokeh/jupyter_bokeh@1.0.0 
 jupyter labextension install jupyter-matplotlib@^0.5.0
 jupyter labextension install jupyter-threejs
+jupyter labextension install bqplot
