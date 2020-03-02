@@ -44,6 +44,7 @@ dependencies:
   - ghostscript
   - rpy2
   - altair
+  - plotly
 
 
 
