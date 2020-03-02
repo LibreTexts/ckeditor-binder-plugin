@@ -43,6 +43,7 @@ dependencies:
   - gnuplot
   - ghostscript
   - rpy2
+  - altair
 
 
 
