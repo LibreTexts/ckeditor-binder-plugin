@@ -9,6 +9,7 @@
     "thebelab": "readable",
     "LibreEditor": "readable",
     "$": "readable",
+    "define": "readable",
   },
   "rules": {
     "new-cap": [
