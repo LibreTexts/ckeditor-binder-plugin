@@ -1,14 +1,4 @@
-const loadThebelabScript = () => new Promise((resolve, reject) => {
-  if (window.thebelab !== undefined) resolve();
-
-  const script = document.createElement('script');
-
-  script.onload = () => { resolve(); };
-  script.onerror = () => { reject(); };
-
-  script.src = 'https://unpkg.com/thebelab@0.5.1/lib/index.js';
-  document.head.appendChild(script);
-});
+import loadScript from './ultility';
 
 const binderUrl = 'https://mybinder.org';
 
@@ -81,13 +71,17 @@ const activateThebelab = (config, detectLanguage = true) => {
       mergeConfig = Object.assign(mergeConfig, getConfig(getLanguage()));
     }
 
-    loadThebelabScript()
-      .then(() => {
-        thebelab.bootstrap(mergeConfig);
-      })
-      .catch(() => {
-        // todo: deal with error handling
-      });
+    if (window.thebelab === undefined) {
+      loadScript('https://unpkg.com/thebelab@0.5.1/lib/index.js')
+        .then(() => {
+          thebelab.bootstrap(mergeConfig);
+        })
+        .catch(() => {
+          // todo: deal with error handling
+        });
+    } else {
+      thebelab.bootstrap(mergeConfig);
+    }
   }
 };
 
