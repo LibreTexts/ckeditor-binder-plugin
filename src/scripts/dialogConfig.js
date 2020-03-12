@@ -104,7 +104,6 @@ const dialogConfig = (editor) => ({
   onShow() {
     const dialog = this;
     const language = getLanguage(editor);
-    dialog.setValueOf('tab-basic', 'language', language);
 
     // set code and output
     // getModel is not supported on older versions
@@ -132,6 +131,8 @@ const dialogConfig = (editor) => ({
     codeArea.setHtml(editScriptAreaHTML(languageDictionary[language], code, output));
 
     this.resize(500, 500);
+
+    dialog.setValueOf('tab-basic', 'language', language);
   },
   onCancel() {
     const dialog = this;
