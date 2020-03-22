@@ -103,6 +103,7 @@ const dialogConfig = (editor) => ({
     const dialogLanguage = dialog.getValueOf('tab-basic', 'language');
     codeArea.setHtml(editScriptAreaHTML(languageDictionary[dialogLanguage]));
     activateThebelab(thebelabConfig);
+    window.ckeditorBinderPlugin.kernelLanguage = 'Python 3';
   },
 
   // The dialog is showed when either the user wants
@@ -119,7 +120,7 @@ const dialogConfig = (editor) => ({
     // set code and output
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
-    const widget = window.currentEditedThebelabWidgetByBinderDialog;
+    const widget = window.ckeditorBinderPlugin.currentWidget;
     const preTag = widget.element.findOne('pre');
     let code = '';
     if (preTag) {
@@ -139,20 +140,12 @@ const dialogConfig = (editor) => ({
     }
 
     const language = getLanguage(editor);
-    const dialogLanguage = dialog.getValueOf('tab-basic', 'language');
+    dialog.setValueOf('tab-basic', 'language', language);
 
-    // we only set this when language has changed
-    // becuase change will will create a new thebelab instance
-    if (language !== dialogLanguage) {
-      dialog.setValueOf('tab-basic', 'language', language);
-      const codeArea = dialog.getContentElement('tab-basic', 'code').getElement();
-      codeArea.setHtml(editScriptAreaHTML(languageDictionary[language], code, output));
-    } else {
-      const cm = getCodeMirror();
-      if (cm) cm.setValue(code.trim());
-      const thebelabOutputArea = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
-      if (thebelabOutputArea) thebelabOutputArea.innerHTML = output;
-    }
+    const cm = getCodeMirror();
+    if (cm) cm.setValue(code.trim());
+    const thebelabOutputArea = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+    if (thebelabOutputArea) thebelabOutputArea.innerHTML = output;
 
     this.resize(500, 500);
   },
@@ -177,9 +170,12 @@ const dialogConfig = (editor) => ({
           items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
           default: 'Python 3',
           onChange() {
-            const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
-            element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
-            activateThebelab(thebelabConfig);
+            if (window.ckeditorBinderPlugin.kernelLanguage !== this.getValue()) {
+              const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
+              element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+              activateThebelab(thebelabConfig);
+              window.ckeditorBinderPlugin.kernelLanguage = this.getValue();
+            }
           },
         },
         {
@@ -226,7 +222,7 @@ const dialogConfig = (editor) => ({
 
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
-    const widget = window.currentEditedThebelabWidgetByBinderDialog;
+    const widget = window.ckeditorBinderPlugin.currentWidget;
 
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
 

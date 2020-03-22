@@ -5,6 +5,8 @@ import widgetConfig from './widgetConfig';
 const loadPlugin = () => {
   CKEDITOR.plugins.add('enableBinder', {
     onLoad: () => {
+      window.ckeditorBinderPlugin = {};
+
       // here we can add css to the editor
       // we might consider extract it to another file
       // and use raw-loader to get it
