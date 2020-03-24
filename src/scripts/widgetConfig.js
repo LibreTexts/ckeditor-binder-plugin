@@ -74,7 +74,7 @@ const widgetConfig = {
     // However, it is not not supported on older versions
     // here is a hack that attaches it as a global var
     this.on('edit', () => {
-      window.currentEditedThebelabWidgetByBinderDialog = this;
+      window.ckeditorBinderPlugin.currentWidget = this;
     });
   },
   template,

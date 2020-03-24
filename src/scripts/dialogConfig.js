@@ -6,19 +6,19 @@ const thebelabConfig = {
 };
 
 const languageDictionary = {
-  'Python 3': ['python'],
-  Julia: ['julia'],
-  R: ['r'],
-  Octave: ['octave'],
-  SageMath: ['sagemath'],
+  'Python 3': 'python',
+  Julia: 'julia',
+  R: 'r',
+  Octave: 'octave',
+  SageMath: 'sagemath',
 };
 
 const dataLanguageDictionary = {
-  python: ['Python 3'],
-  julia: ['Julia'],
-  r: ['R'],
-  octave: ['Octave'],
-  sagemath: ['SageMath'],
+  python: 'Python 3',
+  julia: 'Julia',
+  r: 'R',
+  octave: 'Octave',
+  sagemath: 'SageMath',
 };
 
 const getLanguage = (editor) => {
@@ -88,10 +88,23 @@ const insertWarning = () => `
   </label>
 `;
 
+const getCodeMirror = () => {
+  const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror');
+  return cm ? cm.CodeMirror : null;
+};
+
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
   minWidth: 400,
+  onLoad() {
+    const dialog = this;
+    const codeArea = dialog.getContentElement('tab-basic', 'code').getElement();
+    const dialogLanguage = dialog.getValueOf('tab-basic', 'language');
+    codeArea.setHtml(editScriptAreaHTML(languageDictionary[dialogLanguage]));
+    activateThebelab(thebelabConfig);
+    window.ckeditorBinderPlugin.kernelLanguage = 'Python 3';
+  },
 
   // The dialog is showed when either the user wants
   // to insert a new widget or edit a old widget.
@@ -103,13 +116,11 @@ const dialogConfig = (editor) => ({
   // it is not inserted yet.
   onShow() {
     const dialog = this;
-    const language = getLanguage(editor);
-    dialog.setValueOf('tab-basic', 'language', language);
 
     // set code and output
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
-    const widget = window.currentEditedThebelabWidgetByBinderDialog;
+    const widget = window.ckeditorBinderPlugin.currentWidget;
     const preTag = widget.element.findOne('pre');
     let code = '';
     if (preTag) {
@@ -128,8 +139,13 @@ const dialogConfig = (editor) => ({
       dialog.setValueOf('tab-basic', 'no-output', true);
     }
 
-    const codeArea = dialog.getContentElement('tab-basic', 'code').getElement();
-    codeArea.setHtml(editScriptAreaHTML(languageDictionary[language], code, output));
+    const language = getLanguage(editor);
+    dialog.setValueOf('tab-basic', 'language', language);
+
+    const cm = getCodeMirror();
+    if (cm) cm.setValue(code.trim());
+    const thebelabOutputArea = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
+    if (thebelabOutputArea) thebelabOutputArea.innerHTML = output;
 
     this.resize(500, 500);
   },
@@ -138,7 +154,8 @@ const dialogConfig = (editor) => ({
     const editorLanguage = getLanguage(editor);
     const dialogLanguage = dialog.getValueOf('tab-basic', 'language');
     if (editorLanguage !== dialogLanguage) {
-      activateThebelab(thebelabConfig);
+      // this will reset the thebelab instance on the dialog back to editor language
+      dialog.setValueOf('tab-basic', 'language', editorLanguage);
     }
   },
   contents: [
@@ -153,9 +170,12 @@ const dialogConfig = (editor) => ({
           items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
           default: 'Python 3',
           onChange() {
-            const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
-            element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
-            activateThebelab(thebelabConfig);
+            if (window.ckeditorBinderPlugin.kernelLanguage !== this.getValue()) {
+              const element = this.getDialog().getContentElement('tab-basic', 'code').getElement();
+              element.setHtml(editScriptAreaHTML(languageDictionary[this.getValue()]));
+              activateThebelab(thebelabConfig);
+              window.ckeditorBinderPlugin.kernelLanguage = this.getValue();
+            }
           },
         },
         {
@@ -202,7 +222,7 @@ const dialogConfig = (editor) => ({
 
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
-    const widget = window.currentEditedThebelabWidgetByBinderDialog;
+    const widget = window.ckeditorBinderPlugin.currentWidget;
 
     const language = languageDictionary[dialog.getValueOf('tab-basic', 'language')];
 
@@ -211,11 +231,12 @@ const dialogConfig = (editor) => ({
 
     const noOutput = dialog.getValueOf('tab-basic', 'no-output');
     const noCode = dialog.getValueOf('tab-basic', 'no-code');
-    const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror').CodeMirror;
+    const cm = getCodeMirror();
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
     // the output will contain a pre tag if run by binder
-    if (output.children.length !== 0 && output.children[0].tagName === 'PRE') {
+    // output might be null if no output
+    if (output && output.children.length !== 0 && output.children[0].tagName === 'PRE') {
       output = output.children[0].innerHTML;
     } else {
       output = output.innerHTML;
@@ -227,10 +248,6 @@ const dialogConfig = (editor) => ({
     widget.setData('noCode', noCode);
     widget.setData('output', output);
     widget.setData('noOutput', noOutput);
-
-    // Clears the code output in dialog
-    cm.setValue('print(\'Hello world!\')');
-    document.querySelector('.cke_dialog_contents .thebelab-run-button').click();
   },
 });
 
