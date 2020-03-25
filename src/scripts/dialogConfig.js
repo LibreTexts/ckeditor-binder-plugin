@@ -93,6 +93,14 @@ const getCodeMirror = () => {
   return cm ? cm.CodeMirror : null;
 };
 
+const insertFeedback = () => `
+  <label class="warning">
+    Have feedback? <a href="mailto:jupyterteam@ucdavis.edu">Email us</a>
+    or <a href="https://github.com/LibreTexts/ckeditor-binder-plugin/issues" target="_blank">open an issue</a>
+    on our issue tracker.
+  </label>
+`;
+
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
@@ -209,6 +217,11 @@ const dialogConfig = (editor) => ({
           type: 'html',
           id: 'insert-warning',
           html: insertWarning(),
+        },
+        {
+          type: 'html',
+          id: 'insert-feedback',
+          html: insertFeedback(),
         },
       ],
     },
