@@ -32,3 +32,6 @@
   font-family: FontAwesome !important;
 }
 
+.mt-editor-dialog-binderDialog .mt-label:after, .mt-editor-dialog-binderDialog .label:after {
+  content: '';
+}
