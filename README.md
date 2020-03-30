@@ -47,4 +47,5 @@ Currently the plugin supports Python 3, Julia, R, Octave, and SageMath. Addition
 
 #### Creating a new page
 Authors have the option to add code to a new page.
+
 ![](tutorialVisuals/newPage.gif)
