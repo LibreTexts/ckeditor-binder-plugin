@@ -31,14 +31,12 @@ This repo follows Airbnb Javascript guide, see [here](https://github.com/airbnb/
 CKEditor is a rich text editor which enables the user to write content directly inside web pages or online applications. Through the Binder Plugin, authors of textbooks have the option to include code within in their textbook pages to create a more interactive experience for their students.
 
 ![](tutorialVisuals/ckePlugin.png)  
-*Location and description of plugin*
 
 
 
 Currently the plugin supports Python 3, Julia, R, Octave, and SageMath. Additionally, all languages with the exception of SageMath support syntax highlighting for an easier scripting experience. 
 
-![](tutorialVisuals/ckePlugin.png/languages.png)
-*Language Options*
+![](tutorialVisuals/languages.png)
 
 
 
