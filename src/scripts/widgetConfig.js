@@ -31,12 +31,14 @@ const widgetHtml = (data) => {
 // in front, CKEditor will not like it.
 // use trim() here to remove the spaces.
 const template = `
-  <div class="thebelab">
+  <div class="thebelab-widget">
     <pre data-executable="true" data-language="python3">
       print('hello world')
     </pre>
     <div data-output="true">
-      hello world
+      <pre>
+        hello world
+      </pre>
     </div>
   </div>
 `.trim();
@@ -89,7 +91,7 @@ const widgetConfig = {
     return element;
   },
   upcast(element) {
-    return element.hasClass('thebelab');
+    return element.hasClass('thebelab-widget');
   },
 };
 
