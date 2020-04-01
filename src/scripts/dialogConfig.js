@@ -35,6 +35,8 @@ const getLanguage = (editor) => {
   return language;
 };
 
+const wrapPreTag = (code) => `<pre>${code}</pre>`;
+
 const editScriptAreaHTML = (language = 'python', code = null, output = null) => {
   const sample = {
     python: {
@@ -67,7 +69,7 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
       ${code === null ? sample[language].code : code}
     </pre>
     <div data-output="true">
-      ${output === null ? sample[language].output : output}
+      ${output === null ? wrapPreTag(sample[language].output) : output}
     </div>
   `;
 };
@@ -247,12 +249,12 @@ const dialogConfig = (editor) => ({
     const cm = getCodeMirror();
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
-    // the output will contain a pre tag if run by binder
+
     // output might be null if no output
-    if (output && output.children.length !== 0 && output.children[0].tagName === 'PRE') {
-      output = output.children[0].innerHTML;
-    } else {
+    if (output) {
       output = output.innerHTML;
+    } else {
+      output = '<pre></pre>';
     }
 
     // pass to widgets to figure out
