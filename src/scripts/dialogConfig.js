@@ -35,6 +35,8 @@ const getLanguage = (editor) => {
   return language;
 };
 
+const wrapPreTag = (code) => `<pre>${code}</pre>`;
+
 const editScriptAreaHTML = (language = 'python', code = null, output = null) => {
   const sample = {
     python: {
@@ -67,7 +69,7 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
       ${code === null ? sample[language].code : code}
     </pre>
     <div data-output="true">
-      ${output === null ? sample[language].output : output}
+      ${output === null ? wrapPreTag(sample[language].output) : output}
     </div>
   `;
 };
@@ -92,6 +94,14 @@ const getCodeMirror = () => {
   const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror');
   return cm ? cm.CodeMirror : null;
 };
+
+const insertFeedback = () => `
+  <label class="warning">
+    Have feedback? <a href="mailto:jupyterteam@ucdavis.edu">Email us</a>
+    or <a href="https://github.com/LibreTexts/ckeditor-binder-plugin/issues" target="_blank">open an issue</a>
+    on our issue tracker.
+  </label>
+`;
 
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
@@ -210,6 +220,11 @@ const dialogConfig = (editor) => ({
           id: 'insert-warning',
           html: insertWarning(),
         },
+        {
+          type: 'html',
+          id: 'insert-feedback',
+          html: insertFeedback(),
+        },
       ],
     },
   ],
@@ -234,12 +249,12 @@ const dialogConfig = (editor) => ({
     const cm = getCodeMirror();
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
-    // the output will contain a pre tag if run by binder
+
     // output might be null if no output
-    if (output && output.children.length !== 0 && output.children[0].tagName === 'PRE') {
-      output = output.children[0].innerHTML;
-    } else {
+    if (output) {
       output = output.innerHTML;
+    } else {
+      output = '<pre></pre>';
     }
 
     // pass to widgets to figure out

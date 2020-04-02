@@ -10,7 +10,7 @@ const loadThebelabScript = () => new Promise((resolve, reject) => {
   document.head.appendChild(script);
 });
 
-const binderUrl = 'https://binder.libretexts.org';
+const binderUrl = 'https://mybinder.org';
 
 const defaultConfig = {
   binderOptions: {
