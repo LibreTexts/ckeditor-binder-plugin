@@ -55,10 +55,10 @@ The Binnder Logo is the last button on the navigation bar of the text editor.
 ![](tutorialVisuals/ckePlugin.png)  
 
 #### Add Code
-To add a block of code, select the language, and add code in the text space. Remember to press run, and allow the ouput to fully apear in order for it to properly show up on the webpage
+To add a block of code, select the language and add code in the text space. Remember to press run and allow the ouput to fully apear in order for it to properly show up on the webpage.
 ![](tutorialVisuals/addCode.gif) 
 
 ### An Example Page
-Remeber to press save once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages available.
+Remeber to press save once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages already available.
 ![](tutorialVisuals/examplePage.gif)
 
