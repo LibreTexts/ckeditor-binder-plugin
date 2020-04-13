@@ -59,5 +59,5 @@ To add a block of code, select the language and add code in the text space. Reme
 ![](tutorialVisuals/addCode.gif) 
 
 ### An Example Page
-Remeber to press save once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages already available.
+Remember to press "Save" once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages already available.
 ![](tutorialVisuals/examplePage.gif)
