@@ -50,7 +50,7 @@ Additionally, authors can also add code to pages that they have already created.
 ![](tutorialVisuals/editOld.gif)
 
 #### Locating the Plugin and Adding Code
-The Binnder Logo is the last button on the navigation bar of the text editor.  
+The Binder logo is the last button on the navigation bar of the text editor.  
 
 ![](tutorialVisuals/ckePlugin.png)  
 
@@ -61,4 +61,3 @@ To add a block of code, select the language and add code in the text space. Reme
 ### An Example Page
 Remeber to press save once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages already available.
 ![](tutorialVisuals/examplePage.gif)
-
