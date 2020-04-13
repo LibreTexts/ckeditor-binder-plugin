@@ -55,7 +55,7 @@ The Binder logo is the last button on the navigation bar of the text editor.
 ![](tutorialVisuals/ckePlugin.png)  
 
 #### Add code
-To add a block of code, select the language and add code in the text space. Remember to press run and allow the output to fully appear in order for it to properly show up on the webpage.
+To add a block of code, select the language and add code in the text space. Remember to press run and allow the output to fully appear in order for it to properly show up on the webpage. To edit code that has already been added, just double click the code block.
 ![](tutorialVisuals/addCode.gif) 
 
 ### An Example Page
