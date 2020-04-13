@@ -56,7 +56,9 @@ The Binder logo is the last button on the navigation bar of the text editor.
 
 #### Add code
 To add a block of code, select the language and add code in the text space. Remember to press run and allow the output to fully appear in order for it to properly show up on the webpage. To edit code that has already been added, just double click the code block or click the binder button again.
+
 ![](tutorialVisuals/addCode.gif) 
+
 
 ### An Example Page
 Remember to press "Save" once edits to the page are done, the following is an example page utilizing the Binder Plugin. As seen, authors can use libraries and packages already available.
