@@ -45,7 +45,7 @@ Authors have the option to add code to a new page.
 
 ![](tutorialVisuals/newPage.gif)
 
-#### Editing a exisiting page
+#### Editing a existing page
 Additionally, authors can also add code to pages that they have already created. To do so, simply click on the "Edit" button.
 ![](tutorialVisuals/editOld.gif)
 
