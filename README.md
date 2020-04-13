@@ -49,7 +49,7 @@ Authors have the option to add code to a new page.
 Additionally, authors can also add code to pages that they have already created. To do so, simply click on the "Edit" button.
 ![](tutorialVisuals/editOld.gif)
 
-#### Locating the Plugin and Adding Code
+#### Locating the plugin and adding code
 The Binder logo is the last button on the navigation bar of the text editor.  
 
 ![](tutorialVisuals/ckePlugin.png)  
