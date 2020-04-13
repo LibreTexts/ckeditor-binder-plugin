@@ -35,6 +35,8 @@ const getLanguage = (editor) => {
   return language;
 };
 
+const wrapPreTag = (code) => `<pre>${code}</pre>`;
+
 const editScriptAreaHTML = (language = 'python', code = null, output = null) => {
   const sample = {
     python: {
@@ -67,7 +69,7 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
       ${code === null ? sample[language].code : code}
     </pre>
     <div data-output="true">
-      ${output === null ? sample[language].output : output}
+      ${output === null ? wrapPreTag(sample[language].output) : output}
     </div>
   `;
 };
@@ -92,6 +94,14 @@ const getCodeMirror = () => {
   const cm = document.querySelector('.cke_dialog_contents .thebelab-input .CodeMirror');
   return cm ? cm.CodeMirror : null;
 };
+
+const insertFeedback = () => `
+  <label class="warning">
+    Have feedback? <a href="mailto:jupyterteam@ucdavis.edu">Email us</a>
+    or <a href="https://github.com/LibreTexts/ckeditor-binder-plugin/issues" target="_blank">open an issue</a>
+    on our issue tracker.
+  </label>
+`;
 
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
@@ -127,7 +137,7 @@ const dialogConfig = (editor) => ({
       code = preTag.getHtml();
 
       // set noCode to true
-      if (preTag.hasClass('no-code')) dialog.setValueOf('tab-basic', 'no-code', true);
+      if (preTag.hasClass('no-code')) dialog.setValueOf('tab-basic', 'radio-buttons', 'no-code');
     }
 
     const outputTag = widget.element.findOne('div[data-output]');
@@ -136,7 +146,7 @@ const dialogConfig = (editor) => ({
       output = outputTag.getHtml();
     } else {
       // set noOutput to be checked
-      dialog.setValueOf('tab-basic', 'no-output', true);
+      dialog.setValueOf('tab-basic', 'radio-buttons', 'no-output');
     }
 
     const language = getLanguage(editor);
@@ -185,30 +195,22 @@ const dialogConfig = (editor) => ({
           html: '',
         },
         {
-          type: 'hbox',
-          id: 'checkboxes',
-          widths: ['25%', '25%', '50%'],
-          children: [
-            {
-              type: 'checkbox',
-              id: 'no-output',
-              label: 'Insert without output',
-            },
-            {
-              type: 'checkbox',
-              id: 'no-code',
-              label: 'Insert with code hidden',
-            },
-            {
-              type: 'html',
-              html: '',
-            },
-          ],
+          type: 'radio',
+          id: 'radio-buttons',
+          items: [['Insert with code and output', 'both'],
+            ['Insert with code only', 'no-output'],
+            ['Insert with output only', 'no-code']],
+          default: 'both',
         },
         {
           type: 'html',
           id: 'insert-warning',
           html: insertWarning(),
+        },
+        {
+          type: 'html',
+          id: 'insert-feedback',
+          html: insertFeedback(),
         },
       ],
     },
@@ -219,7 +221,6 @@ const dialogConfig = (editor) => ({
   // We only need to set the correct widget data.
   onOk() {
     const dialog = this;
-
     // getModel is not supported on older versions
     // const widget = dialog.getModel(editor);
     const widget = window.ckeditorBinderPlugin.currentWidget;
@@ -229,17 +230,29 @@ const dialogConfig = (editor) => ({
     // changes the data-language attributes of all pre tags in editor
     changeAllLanguages(editor, language);
 
-    const noOutput = dialog.getValueOf('tab-basic', 'no-output');
-    const noCode = dialog.getValueOf('tab-basic', 'no-code');
+    let noOutput = false;
+    let noCode = false;
+
+    switch (dialog.getValueOf('tab-basic', 'radio-buttons')) {
+      case 'no-output':
+        noOutput = true;
+        break;
+      case 'no-code':
+        noCode = true;
+        break;
+      default:
+        break;
+    }
+
     const cm = getCodeMirror();
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
-    // the output will contain a pre tag if run by binder
+
     // output might be null if no output
-    if (output && output.children.length !== 0 && output.children[0].tagName === 'PRE') {
-      output = output.children[0].innerHTML;
-    } else {
+    if (output) {
       output = output.innerHTML;
+    } else {
+      output = '<pre></pre>';
     }
 
     // pass to widgets to figure out

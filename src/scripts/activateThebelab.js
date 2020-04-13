@@ -1,16 +1,6 @@
-const loadThebelabScript = () => new Promise((resolve, reject) => {
-  if (window.thebelab !== undefined) resolve();
+import loadScript from './loadScript';
 
-  const script = document.createElement('script');
-
-  script.onload = () => { resolve(); };
-  script.onerror = () => { reject(); };
-
-  script.src = 'https://unpkg.com/thebelab@0.5.1/lib/index.js';
-  document.head.appendChild(script);
-});
-
-const binderUrl = 'https://binder.libretexts.org';
+const binderUrl = 'https://mybinder.org';
 
 const defaultConfig = {
   binderOptions: {
@@ -81,7 +71,7 @@ const activateThebelab = (config, detectLanguage = true) => {
       mergeConfig = Object.assign(mergeConfig, getConfig(getLanguage()));
     }
 
-    loadThebelabScript()
+    loadScript('https://unpkg.com/thebelab@0.5.1/lib/index.js')
       .then(() => {
         thebelab.bootstrap(mergeConfig);
       })
