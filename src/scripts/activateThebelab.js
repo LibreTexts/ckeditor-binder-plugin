@@ -42,7 +42,7 @@ const getConfig = (language) => {
     case 'julia':
       config.binderOptions.repo = 'binder-examples/demo-julia';
       config.binderOptions.ref = 'master';
-      config.kernelOptions.kernelName = 'julia-1.1';
+      config.kernelOptions.kernelName = 'julia-1.4';
       break;
     case 'octave':
       config.binderOptions.repo = 'binder-examples/octave';
