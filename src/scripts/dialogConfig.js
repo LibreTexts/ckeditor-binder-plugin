@@ -62,7 +62,7 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
       output: 'Hello world!',
     },
     cpp: {
-      code: '#include <iostream>\nstd::cout << "Hello world!" << std::endl;',
+      code: '#include &lt;iostream&gt;\nstd::cout << "Hello world!" << std::endl;',
       output: 'Hello world!',
     },
   };
