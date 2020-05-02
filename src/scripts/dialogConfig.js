@@ -20,7 +20,7 @@ const dataLanguageDictionary = {
   r: 'R',
   octave: 'Octave',
   sagemath: 'SageMath',
-  'cpp': 'C++',
+  cpp: 'C++',
 };
 
 const getLanguage = (editor) => {
