@@ -11,6 +11,7 @@ const languageDictionary = {
   R: 'r',
   Octave: 'octave',
   SageMath: 'sagemath',
+  'C++': 'c++',
 };
 
 const dataLanguageDictionary = {
@@ -19,6 +20,7 @@ const dataLanguageDictionary = {
   r: 'R',
   octave: 'Octave',
   sagemath: 'SageMath',
+  'c++': 'C++',
 };
 
 const getLanguage = (editor) => {
@@ -57,6 +59,10 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
     },
     sagemath: {
       code: 'print(\'Hello world!\')',
+      output: 'Hello world!',
+    },
+    'c++': {
+      code: '#include <iostream>\nstd::cout << "Hello world!" << std::endl;',
       output: 'Hello world!',
     },
   };

@@ -34,6 +34,11 @@ const getConfig = (language) => {
   };
 
   switch (language) {
+    case 'c++':
+      config.binderOptions.repo = 'jupyter-xeus/xeus-cling';
+      config.binderOptions.ref = 'stable';
+      config.kernelOptions.kernelName = 'xeus-cling';
+      break;
     case 'sagemath':
       config.binderOptions.repo = 'sagemath/sage-binder-env';
       config.binderOptions.ref = 'master';
