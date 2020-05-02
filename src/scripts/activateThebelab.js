@@ -34,7 +34,7 @@ const getConfig = (language) => {
   };
 
   switch (language) {
-    case 'c++':
+    case 'cpp':
       config.binderOptions.repo = 'jupyter-xeus/xeus-cling';
       config.binderOptions.ref = 'stable';
       config.kernelOptions.kernelName = 'xeus-cling';
