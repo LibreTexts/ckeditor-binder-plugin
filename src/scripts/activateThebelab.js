@@ -34,7 +34,7 @@ const getConfig = (language) => {
   };
 
   switch (language) {
-    case 'cpp':
+    case 'text/x-c++src':
       config.binderOptions.repo = 'jupyter-xeus/xeus-cling';
       config.binderOptions.ref = 'stable';
       config.kernelOptions.kernelName = 'xcpp14';
