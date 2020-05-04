@@ -1,5 +1,24 @@
 import activateThebelab from './activateThebelab';
 
+function htmlToCode(str) {
+  return String(str)
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, '\'');
+}
+
+function codeToHtml(str) {
+  return String(str)
+    .replace('&', '&amp;')
+    .replace('<', '&lt;')
+    .replace('>', '&gt;')
+    .replace('"', '&quot;')
+    .replace('\'', '&#039;');
+}
+
+
 const thebelabConfig = {
   // this will speed up the process
   requestKernel: true,
@@ -159,7 +178,7 @@ const dialogConfig = (editor) => ({
     dialog.setValueOf('tab-basic', 'language', language);
 
     const cm = getCodeMirror();
-    if (cm) cm.setValue(code.trim());
+    if (cm) cm.setValue(htmlToCode(code.trim()));
     const thebelabOutputArea = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
     if (thebelabOutputArea) thebelabOutputArea.innerHTML = output;
 
@@ -263,7 +282,7 @@ const dialogConfig = (editor) => ({
 
     // pass to widgets to figure out
     widget.setData('language', language);
-    widget.setData('code', cm.getValue());
+    widget.setData('code', codeToHtml(cm.getValue()));
     widget.setData('noCode', noCode);
     widget.setData('output', output);
     widget.setData('noOutput', noOutput);
