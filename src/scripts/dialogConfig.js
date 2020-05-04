@@ -11,6 +11,7 @@ const languageDictionary = {
   R: 'r',
   Octave: 'octave',
   SageMath: 'sagemath',
+  'C++': 'text/x-c++src',
 };
 
 const dataLanguageDictionary = {
@@ -19,6 +20,7 @@ const dataLanguageDictionary = {
   r: 'R',
   octave: 'Octave',
   sagemath: 'SageMath',
+  'text/x-c++src': 'C++',
 };
 
 const getLanguage = (editor) => {
@@ -57,6 +59,10 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
     },
     sagemath: {
       code: 'print(\'Hello world!\')',
+      output: 'Hello world!',
+    },
+    'text/x-c++src': {
+      code: '#include &lt;iostream&gt;\nstd::cout << "Hello world!" << std::endl;',
       output: 'Hello world!',
     },
   };
@@ -177,7 +183,7 @@ const dialogConfig = (editor) => ({
           type: 'select',
           id: 'language',
           label: 'Select language for page:',
-          items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
+          items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath'], ['C++']],
           default: 'Python 3',
           onChange() {
             if (window.ckeditorBinderPlugin.kernelLanguage !== this.getValue()) {
