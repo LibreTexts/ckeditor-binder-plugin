@@ -1,6 +1,6 @@
 import loadScript from './loadScript';
 
-const binderUrl = 'https://mybinder.org';
+const binderUrl = 'https://binder.libretexts.org';
 
 const defaultConfig = {
   binderOptions: {
@@ -24,8 +24,8 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'LibreTexts/ckeditor-binder-plugin',
-      ref: 'Python-Env',
+      repo: 'celine168/default-env-condensed',
+      ref: 'master',
       binderUrl,
     },
     kernelOptions: {
@@ -35,28 +35,18 @@ const getConfig = (language) => {
 
   switch (language) {
     case 'text/x-c++src':
-      config.binderOptions.repo = 'jupyter-xeus/xeus-cling';
-      config.binderOptions.ref = 'stable';
       config.kernelOptions.kernelName = 'xcpp14';
       break;
     case 'sagemath':
-      config.binderOptions.repo = 'sagemath/sage-binder-env';
-      config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'sagemath';
       break;
     case 'julia':
-      config.binderOptions.repo = 'binder-examples/demo-julia';
-      config.binderOptions.ref = 'master';
-      config.kernelOptions.kernelName = 'julia-1.4';
+      config.kernelOptions.kernelName = 'julia-1.1';
       break;
     case 'octave':
-      config.binderOptions.repo = 'binder-examples/octave';
-      config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'octave';
       break;
     case 'r':
-      config.binderOptions.repo = 'binder-examples/r';
-      config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'ir';
       break;
     case 'python':
