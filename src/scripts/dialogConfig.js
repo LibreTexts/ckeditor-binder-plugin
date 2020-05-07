@@ -6,7 +6,8 @@ function htmlToCode(str) {
     .replace(/&lt;/g, '<')
     .replace(/&gt;/g, '>')
     .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, '\'');
+    .replace(/&#039;/g, '\'')
+    .replace(/&#x60/g, '`');
 }
 
 function codeToHtml(str) {
@@ -15,7 +16,8 @@ function codeToHtml(str) {
     .replace('<', '&lt;')
     .replace('>', '&gt;')
     .replace('"', '&quot;')
-    .replace('\'', '&#039;');
+    .replace('\'', '&#039;')
+    .replace('`', '&#x60;');
 }
 
 
