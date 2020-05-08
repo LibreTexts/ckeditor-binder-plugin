@@ -1,5 +1,5 @@
 # CKeditor Binder Plugin
-![](https://github.com/LibreTexts/ckeditor-binder-plugin/workflows/Sync%20to%20DigitalOcean%20Spaces/badge.svg?branch=master)
+[![Sync to DigitalOcean Spaces](https://github.com/LibreTexts/ckeditor-binder-plugin/workflows/Sync%20to%20DigitalOcean%20Spaces/badge.svg?branch=master)](https://github.com/LibreTexts/ckeditor-binder-plugin/actions?query=workflow%3A%22Sync+to+DigitalOcean+Spaces%22)
 
 A CKeditor plugin that makes adding binder enabled pre tags easy.
 
