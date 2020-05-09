@@ -34,6 +34,11 @@ const getConfig = (language) => {
   };
 
   switch (language) {
+    case 'text/x-c++src':
+      config.binderOptions.repo = 'jupyter-xeus/xeus-cling';
+      config.binderOptions.ref = 'stable';
+      config.kernelOptions.kernelName = 'xcpp14';
+      break;
     case 'sagemath':
       config.binderOptions.repo = 'sagemath/sage-binder-env';
       config.binderOptions.ref = 'master';
@@ -42,7 +47,7 @@ const getConfig = (language) => {
     case 'julia':
       config.binderOptions.repo = 'binder-examples/demo-julia';
       config.binderOptions.ref = 'master';
-      config.kernelOptions.kernelName = 'julia-1.1';
+      config.kernelOptions.kernelName = 'julia-1.4';
       break;
     case 'octave':
       config.binderOptions.repo = 'binder-examples/octave';

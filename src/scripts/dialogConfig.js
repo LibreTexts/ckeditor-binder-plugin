@@ -1,5 +1,26 @@
 import activateThebelab from './activateThebelab';
 
+function htmlToCode(str) {
+  return String(str)
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#039;/g, '\'')
+    .replace(/&#x60/g, '`');
+}
+
+function codeToHtml(str) {
+  return String(str)
+    .replace('&', '&amp;')
+    .replace('<', '&lt;')
+    .replace('>', '&gt;')
+    .replace('"', '&quot;')
+    .replace('\'', '&#039;')
+    .replace('`', '&#x60;');
+}
+
+
 const thebelabConfig = {
   // this will speed up the process
   requestKernel: true,
@@ -11,6 +32,7 @@ const languageDictionary = {
   R: 'r',
   Octave: 'octave',
   SageMath: 'sagemath',
+  'C++': 'text/x-c++src',
 };
 
 const dataLanguageDictionary = {
@@ -19,6 +41,7 @@ const dataLanguageDictionary = {
   r: 'R',
   octave: 'Octave',
   sagemath: 'SageMath',
+  'text/x-c++src': 'C++',
 };
 
 const getLanguage = (editor) => {
@@ -57,6 +80,10 @@ const editScriptAreaHTML = (language = 'python', code = null, output = null) => 
     },
     sagemath: {
       code: 'print(\'Hello world!\')',
+      output: 'Hello world!',
+    },
+    'text/x-c++src': {
+      code: '#include &lt;iostream&gt;\nstd::cout << "Hello world!" << std::endl;',
       output: 'Hello world!',
     },
   };
@@ -153,7 +180,7 @@ const dialogConfig = (editor) => ({
     dialog.setValueOf('tab-basic', 'language', language);
 
     const cm = getCodeMirror();
-    if (cm) cm.setValue(code.trim());
+    if (cm) cm.setValue(htmlToCode(code.trim()));
     const thebelabOutputArea = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
     if (thebelabOutputArea) thebelabOutputArea.innerHTML = output;
 
@@ -177,7 +204,7 @@ const dialogConfig = (editor) => ({
           type: 'select',
           id: 'language',
           label: 'Select language for page:',
-          items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath']],
+          items: [['Python 3'], ['Julia'], ['R'], ['Octave'], ['SageMath'], ['C++']],
           default: 'Python 3',
           onChange() {
             if (window.ckeditorBinderPlugin.kernelLanguage !== this.getValue()) {
@@ -257,7 +284,7 @@ const dialogConfig = (editor) => ({
 
     // pass to widgets to figure out
     widget.setData('language', language);
-    widget.setData('code', cm.getValue());
+    widget.setData('code', codeToHtml(cm.getValue()));
     widget.setData('noCode', noCode);
     widget.setData('output', output);
     widget.setData('noOutput', noOutput);
