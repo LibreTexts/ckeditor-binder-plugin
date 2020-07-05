@@ -50,8 +50,8 @@ const getConfig = (language) => {
       config.kernelOptions.kernelName = 'julia-1.4';
       break;
     case 'octave':
-      config.binderOptions.repo = 'binder-examples/octave';
-      config.binderOptions.ref = 'master';
+      //config.binderOptions.repo = 'binder-examples/octave';
+      //config.binderOptions.ref = 'master';
       config.kernelOptions.kernelName = 'octave';
       break;
     case 'r':
