@@ -15,6 +15,14 @@
             overflow: auto;
             width: 100% !important;
             max-height: 60vh;
+
+            .thebelab-cell {
+              max-width: 55vw;
+
+              .jp-OutputArea-output {
+                overflow-x: scroll;
+              }
+            }
           }
         }
       }
@@ -22,7 +30,7 @@
   }
 }
 
-.thebelab {
+.thebelab-widget {
   pre.no-code {
     display: none;
   }
