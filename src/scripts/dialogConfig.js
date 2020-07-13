@@ -20,7 +20,6 @@ function codeToHtml(str) {
     .replace('`', '&#x60;');
 }
 
-
 const thebelabConfig = {
   // this will speed up the process
   requestKernel: true,
