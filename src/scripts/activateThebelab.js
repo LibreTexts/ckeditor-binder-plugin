@@ -84,6 +84,11 @@ const activateThebelab = (config, detectLanguage = true) => {
         // todo: deal with error handling
       });
   }
+
+  // edge warning
+  if (navigator.userAgent.includes("Edge")) {
+    alert("WARNING: You're using an older version of Edge. All code cells on this page will be broken on your browser. Please update to Chromium Edge or use a different browser.");
+  }
 };
 
 export default activateThebelab;
