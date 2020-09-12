@@ -87,7 +87,8 @@ const activateThebelab = (config, detectLanguage = true) => {
 
   // edge warning
   if (navigator.userAgent.includes('Edge')) {
-    alert("WARNING: You're using an older version of Edge. All code cells on this page will be broken on your browser. Please update to Chromium Edge or use a different browser.");
+    // disable eslint warning, this is meant to be obtrusive
+    alert("WARNING: You're using an older version of Edge. All code cells on this page will be broken on your browser. Please update to Chromium Edge or use a different browser."); // eslint-disable-line no-alert
   }
 };
 
