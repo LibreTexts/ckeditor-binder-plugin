@@ -41,7 +41,7 @@ const getConfig = (language) => {
       config.kernelOptions.kernelName = 'sagemath';
       break;
     case 'julia':
-      config.kernelOptions.kernelName = 'julia-1.4';
+      config.kernelOptions.kernelName = 'julia-1.5';
       break;
     case 'octave':
       config.kernelOptions.kernelName = 'octave';
