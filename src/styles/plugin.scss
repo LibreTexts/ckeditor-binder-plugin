@@ -30,6 +30,13 @@
   }
 }
 
+// thebe does not include the css of the packages it uses
+// see https://github.com/jupyterlab/jupyterlab/blob/master/packages/outputarea/style/base.css#L190
+.jp-Stdin-input {
+  width: 42%;
+  min-width: 200px;
+}
+
 .thebelab-widget {
   pre.no-code {
     display: none;
