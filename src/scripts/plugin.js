@@ -18,6 +18,7 @@ const loadPlugin = () => {
       // not sure why allowedContent in the widgetConfig
       // won't work. So set it here
       editor.filter.allow('div(thebelab-widget);pre[data-executable,data-language](no-code);div[data-output]');
+      editor.filter.allow('div(thebe-status-field)');
 
       CKEDITOR.dialog.add('binderDialog', dialogConfig);
       editor.widgets.add('thebelabWidget', widgetConfig);
