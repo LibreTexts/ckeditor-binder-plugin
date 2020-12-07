@@ -129,6 +129,34 @@ const insertFeedback = () => `
   </label>
 `;
 
+const insertStatusHtml = (editor, language) => {
+  // remember the current selection so that we can go back
+  // somehow `insertHtml` move cursor to that position
+  const selection = editor.getSelection();
+  const currentRange = selection.getRanges();
+
+  // create range on the top of the document
+  const range = editor.createRange();
+  range.selectNodeContents(editor.document.getBody());
+  range.moveToPosition(editor.document.getBody(), CKEDITOR.POSITION_AFTER_START);
+  range.collapse(); // this sets start and end position to the same
+
+  // insert the HTML
+  editor.insertHtml(`
+    <div class="thebe-status-field">${language.toUpperCase()} Session: NOT STARTED</div>
+  `, 'html', range);
+
+  // go back to original selection
+  selection.selectRanges(currentRange);
+};
+
+const removeStatusHtmlIfAny = (editor) => {
+  const statusField = editor.document.findOne('.thebe-status-field');
+  if (statusField !== null) {
+    statusField.remove();
+  }
+};
+
 const dialogConfig = (editor) => ({
   title: 'Insert Interactive Script',
   minHeight: 100,
@@ -287,6 +315,9 @@ const dialogConfig = (editor) => ({
     widget.setData('noCode', noCode);
     widget.setData('output', output);
     widget.setData('noOutput', noOutput);
+
+    removeStatusHtmlIfAny(editor);
+    insertStatusHtml(editor, language);
   },
 });
 
