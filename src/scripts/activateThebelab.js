@@ -1,6 +1,6 @@
 import loadScript from './loadScript';
 
-const binderUrl = 'https://binder.libretexts.org';
+const binderUrl = 'https://mybinder.org/';
 
 const defaultConfig = {
   binderOptions: {
@@ -25,7 +25,7 @@ const getConfig = (language) => {
   const config = {
     binderOptions: {
       repo: 'LibreTexts/default-env',
-      ref: '2.2',
+      ref: '2.3',
       binderUrl,
     },
     kernelOptions: {
