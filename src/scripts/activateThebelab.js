@@ -1,6 +1,6 @@
 import loadScript from './loadScript';
 
-const binderUrl = 'https://binder.libretexts.org';
+const binderUrl = 'https://mybinder.org/';
 
 const defaultConfig = {
   binderOptions: {
