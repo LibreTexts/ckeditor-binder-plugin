@@ -62,12 +62,26 @@ const activateThebelab = (config, detectLanguage = true) => {
 
   // check if any pre block with data-executable=true
   if (document.querySelector('[data-executable=true]') !== null) {
+    const language = getLanguage();
     if (detectLanguage) {
-      mergeConfig = Object.assign(mergeConfig, getConfig(getLanguage()));
+      mergeConfig = Object.assign(mergeConfig, getConfig(language));
     }
 
     loadScript('https://unpkg.com/thebelab@0.5.1/lib/index.js')
       .then(() => {
+        thebelab.on('status', (e, data) => {
+          const statusElement = document.getElementsByClassName('thebe-status-field')[0];
+          if (statusElement !== undefined) {
+            statusElement.innerHTML = `${language.toUpperCase()} Session: ${data.status.toUpperCase()}`;
+            statusElement.setAttribute('class', `thebe-status-field thebe-status-${data.status}`);
+
+            if (data.status === 'ready') {
+              setTimeout(() => {
+                statusElement.remove();
+              }, 3000);
+            }
+          }
+        });
         thebelab.bootstrap(mergeConfig);
       })
       .catch(() => {

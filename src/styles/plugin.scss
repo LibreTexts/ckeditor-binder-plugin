@@ -51,3 +51,49 @@
   content: '';
 }
 
+$status-field-blue: darken(rgb(229, 245, 254), 20);
+$status-field-green: darken(lightgreen, 20);
+
+.thebe-status-field {
+  position: fixed;
+  bottom: 15px;
+  left: 40px;
+  border: 2px solid rgb(170, 170, 170);
+  padding: 4px;
+  border-radius: 4px;
+  background-color: rgb(249, 249, 249);
+  opacity: 1;
+  display: block;
+  z-index: 10000;
+
+  &.thebe-status-building {
+    /* Binder is building the image */
+    background-color: $status-field-blue;
+  }
+
+  &.thebe-status-built {
+    /* Binder is built the image */
+    background-color: $status-field-blue;
+  }
+
+  &.thebe-status-launching {
+    /* Binder launching the server */
+    background-color: $status-field-blue;
+  }
+
+  &.thebe-status-starting {
+    /* Binder starting the server */
+    background-color: $status-field-blue;
+  }
+
+  &.thebe-status-ready {
+    /* The kernel is connected and ready */
+    background-color: $status-field-green;
+  }
+
+  &.thebe-status-failed {
+    /* Building the image or launching the kernel failed */
+    background-color: red;
+  }
+}
+
