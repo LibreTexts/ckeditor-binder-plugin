@@ -56,6 +56,37 @@ const getConfig = (language) => {
   return config;
 };
 
+const insertThebeStatusHTML = (language) => {
+  const body = document.getElementsByTagName('body')[0];
+  const statusField = document.createElement('div');
+  statusField.innerHTML = `${language.toUpperCase()} Session: NOT STARTED`;
+  statusField.setAttribute('class', 'thebe-status-field');
+  body.append(statusField);
+};
+
+const registerThebeStatusEvent = (language) => {
+  thebelab.on('status', (e, data) => {
+    const statusElement = document.getElementsByClassName('thebe-status-field')[0];
+    if (statusElement !== undefined) {
+      statusElement.innerHTML = `${language.toUpperCase()} Session: ${data.status.toUpperCase()}`;
+      statusElement.setAttribute('class', `thebe-status-field thebe-status-${data.status}`);
+
+      if (data.status === 'ready') {
+        setTimeout(() => {
+          statusElement.remove();
+        }, 3000);
+      }
+    }
+  });
+};
+
+const removeStatusHtmlIfAny = () => {
+  const statusField = document.querySelector('.thebe-status-field');
+  if (statusField !== null) {
+    statusField.remove();
+  }
+};
+
 const activateThebelab = (config, detectLanguage = true) => {
   let mergeConfig = config;
   if (!mergeConfig) mergeConfig = defaultConfig;
@@ -69,20 +100,12 @@ const activateThebelab = (config, detectLanguage = true) => {
 
     loadScript('https://unpkg.com/thebelab@0.5.1/lib/index.js')
       .then(() => {
-        thebelab.on('status', (e, data) => {
-          const statusElement = document.getElementsByClassName('thebe-status-field')[0];
-          if (statusElement !== undefined) {
-            statusElement.innerHTML = `${language.toUpperCase()} Session: ${data.status.toUpperCase()}`;
-            statusElement.setAttribute('class', `thebe-status-field thebe-status-${data.status}`);
-
-            if (data.status === 'ready') {
-              setTimeout(() => {
-                statusElement.remove();
-              }, 3000);
-            }
-          }
-        });
         thebelab.bootstrap(mergeConfig);
+        if (detectLanguage) {
+          removeStatusHtmlIfAny();
+          insertThebeStatusHTML(language);
+          registerThebeStatusEvent(language);
+        }
       })
       .catch(() => {
         // todo: deal with error handling
