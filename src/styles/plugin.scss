@@ -97,3 +97,8 @@ $status-field-green: darken(lightgreen, 20);
   }
 }
 
+@media print {
+ .thebe-status-field {
+   display: none;
+  }
+}
