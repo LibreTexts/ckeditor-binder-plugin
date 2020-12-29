@@ -98,7 +98,7 @@ const activateThebelab = (config, detectLanguage = true) => {
       mergeConfig = Object.assign(mergeConfig, getConfig(language));
     }
 
-    loadScript('https://unpkg.com/thebe@latest/lib/index.js')
+    loadScript('https://unpkg.com/thebe@0.6.0/lib/index.js')
       .then(() => {
         thebelab.bootstrap(mergeConfig);
         if (detectLanguage) {
