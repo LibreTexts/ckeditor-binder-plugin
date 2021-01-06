@@ -1,6 +1,6 @@
 {
   "name": "ckeditor-binder-plugin",
-  "version": "1.5.2",
+  "version": "0.0.0",
   "description": "A CKeditor plugin that makes adding binder enabled pre tags easy.",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.config.prod.js  --colors",

@@ -9,7 +9,7 @@ import activateThebelab from './activateThebelab';
 import loadPlugin from './plugin';
 
 // print CKEditor Binder Plugin version info
-const versionInfo = 'CKEditor Binder Plugin Release: 1.3.1 - Date: 12/2/20';
+const versionInfo = 'CKEditor Binder Plugin Development Version';
 console.log(versionInfo);
 
 loadPlugin();

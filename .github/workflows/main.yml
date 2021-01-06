@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - name: Bump version number
+      run: |
+        VERSION=$(ls release/ | sort | tail -n1 | sed 's/\.md$//')
+        DATE=$(TZ='America/Los_Angeles' date -I)
+        VERSION_STR="Release: $VERSION - Date: $DATE"
+        sed -i "s/Development Version/$VERSION_STR/" src/scripts/index.js
+        sed -i "s/0\.0\.0/$VERSION/" package.json
     - name: Building repo using Webpack
       run: |
         yarn install
