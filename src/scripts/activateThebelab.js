@@ -5,7 +5,7 @@ const binderUrl = 'https://binder.libretexts.org/';
 const defaultConfig = {
   binderOptions: {
     repo: 'binder-examples/requirements',
-    binderUrl,
+    binderUrl: binderUrl,
   },
 };
 
@@ -26,7 +26,7 @@ const getConfig = (language) => {
     binderOptions: {
       repo: 'LibreTexts/default-env',
       ref: '2.3.1',
-      binderUrl,
+      binderUrl: binderUrl,
     },
     kernelOptions: {
       kernelName: 'python',
