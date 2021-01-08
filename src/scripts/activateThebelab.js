@@ -32,7 +32,7 @@ const getConfig = (language) => {
       kernelName: 'python',
     },
   };
- 
+
   // check if override #binderRepoConfig exists
   let binderRepoConfig = document.getElementById('binderRepoConfig');
   if (binderRepoConfig && binderRepoConfig.innerText) {
@@ -41,7 +41,7 @@ const getConfig = (language) => {
     binderRepoConfig = binderRepoConfig.replace('/*]]>*/', '');
     config.binderOptions.repo = binderRepoConfig;
   }
-  
+
   switch (language) {
     case 'text/x-c++src':
       config.kernelOptions.kernelName = 'xcpp14';
