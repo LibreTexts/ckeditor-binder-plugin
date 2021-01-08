@@ -39,7 +39,8 @@ const getConfig = (language) => {
     binderRepoConfig = binderRepoConfig.innerText;
     binderRepoConfig = binderRepoConfig.replace('/*<![CDATA[*/', '');
     binderRepoConfig = binderRepoConfig.replace('/*]]>*/', '');
-    config.binderOptions.repo = binderRepoConfig;
+    binderRepoConfig = JSON.parse(binderRepoConfig);
+    config.binderOptions = Object.assign(binderOptions, {ref: 'master'}, binderRepoConfig);
   }
 
   switch (language) {
