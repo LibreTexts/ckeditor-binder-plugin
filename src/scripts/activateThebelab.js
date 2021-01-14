@@ -2,6 +2,10 @@ import loadScript from './loadScript';
 
 const binderUrl = 'https://binder.libretexts.org/';
 
+// print CKEditor Binder Plugin version info
+const versionInfo = 'CKEditor Binder Plugin Development Version';
+console.log(versionInfo);
+
 const defaultConfig = {
   binderOptions: {
     repo: 'binder-examples/requirements',
