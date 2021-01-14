@@ -8,6 +8,10 @@ import 'ckeditor4';
 import activateThebelab from './activateThebelab';
 import loadPlugin from './plugin';
 
+// print CKEditor Binder Plugin version info
+const versionInfo = 'CKEditor Binder Plugin Development Version';
+console.log(versionInfo);
+
 loadPlugin();
 CKEDITOR.replace('editor');
 
