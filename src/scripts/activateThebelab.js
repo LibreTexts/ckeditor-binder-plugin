@@ -33,25 +33,25 @@ const getConfig = (language) => {
       binderUrl,
     },
     kernelOptions: {
-      kernelName: 'python',
+      name: 'python',
     },
   };
 
   switch (language) {
     case 'text/x-c++src':
-      config.kernelOptions.kernelName = 'xcpp14';
+      config.kernelOptions.name = 'xcpp14';
       break;
     case 'sagemath':
-      config.kernelOptions.kernelName = 'sagemath';
+      config.kernelOptions.name = 'sagemath';
       break;
     case 'julia':
-      config.kernelOptions.kernelName = 'julia-1.5';
+      config.kernelOptions.name = 'julia-1.5';
       break;
     case 'octave':
-      config.kernelOptions.kernelName = 'octave';
+      config.kernelOptions.name = 'octave';
       break;
     case 'r':
-      config.kernelOptions.kernelName = 'ir';
+      config.kernelOptions.name = 'ir';
       break;
     case 'python':
     default:
