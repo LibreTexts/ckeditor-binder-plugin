@@ -1,9 +1,9 @@
 const codeHtml = (code, language, noCode = false) => {
   if (noCode) {
-    return `<pre data-language="${language}" class="no-code">${code}</pre>`;
+    return `<pre data-language="${language}" class="no-code"><![CDATA[${code}]]></pre>`;
   }
 
-  return `<pre data-executable="true" data-language="${language}">${code}</pre>`;
+  return `<pre data-executable="true" data-language="${language}"><![CDATA[${code}]]></pre>`;
 };
 
 const widgetHtml = (data) => {
