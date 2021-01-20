@@ -12,12 +12,12 @@ function htmlToCode(str) {
 
 function codeToHtml(str) {
   return String(str)
-    .replace('&', '&amp;')
-    .replace('<', '&lt;')
-    .replace('>', '&gt;')
-    .replace('"', '&quot;')
-    .replace('\'', '&#039;')
-    .replace('`', '&#x60;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('\'', '&#039;')
+    .replaceAll('`', '&#x60;');
 }
 
 const thebelabConfig = {
