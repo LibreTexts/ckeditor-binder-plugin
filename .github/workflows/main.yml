@@ -32,7 +32,8 @@ jobs:
         SPACE_REGION: ${{ secrets.Spaces_Region}}
         SPACE_ACCESS_KEY_ID: ${{ secrets.Spaces_Key }}
         SPACE_SECRET_ACCESS_KEY: ${{ secrets.Spaces_Secret }}
-    - name: Wait / Sleep
+    # digitalocean has a 1 minute minimum TTL
+    - name: Wait for DigitalOcean cache to expire
       uses: kibertoad/wait-action@1.0.1
       with:
         time: '2m'
@@ -41,4 +42,4 @@ jobs:
       env:
         CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
         CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
-        PURGE_URLS: '["https://cdn.libretexts.net/github/ckeditor-binder-plugin/js/registerPlugin.min.js"]'
+        PURGE_URLS: '["https://cdn.libretexts.net/github/ckeditor-binder-plugin/js/registerPlugin.min.js", "https://cdn.libretexts.net/github/ckeditor-binder-plugin/js/registerPlugin.min.js.map"]'
