@@ -2,22 +2,22 @@ import activateThebelab from './activateThebelab';
 
 function htmlToCode(str) {
   return String(str)
-    .replace(/&amp;/g, '&')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, '\'')
-    .replace(/&#x60/g, '`');
+    .replaceAll('&amp;', '&')
+    .replaceAll('&lt;', '<')
+    .replaceAll('&gt;', '>')
+    .replaceAll('&quot;', '"')
+    .replaceAll('&#039;', '\'')
+    .replaceAll('&#x60;', '`');
 }
 
 function codeToHtml(str) {
   return String(str)
-    .replace('&', '&amp;')
-    .replace('<', '&lt;')
-    .replace('>', '&gt;')
-    .replace('"', '&quot;')
-    .replace('\'', '&#039;')
-    .replace('`', '&#x60;');
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll('\'', '&#039;')
+    .replaceAll('`', '&#x60;');
 }
 
 const thebelabConfig = {
