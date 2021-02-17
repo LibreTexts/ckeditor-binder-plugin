@@ -28,8 +28,8 @@ const getLanguage = () => {
 const getConfig = (language) => {
   const config = {
     binderOptions: {
-      repo: 'LibreTexts/default-env',
-      ref: '2.3.3',
+      repo: 'QuantStack/ipygany',
+      ref: '0.5.0',
       binderUrl,
     },
     kernelOptions: {
