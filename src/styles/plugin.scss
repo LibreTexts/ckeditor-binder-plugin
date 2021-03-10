@@ -43,6 +43,10 @@
   }
 }
 
+.thebelab-cell canvas {
+  max-width: unset;
+}
+
 .fa {
   font-family: FontAwesome !important;
 }
