@@ -43,7 +43,8 @@
   }
 }
 
-.thebelab-cell canvas {
+// allows ipyleaflet's overlay to work
+.leaflet-pane canvas {
   max-width: unset;
 }
 
