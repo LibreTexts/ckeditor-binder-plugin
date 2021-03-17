@@ -43,6 +43,11 @@
   }
 }
 
+// allows ipyleaflet's overlay to work
+.leaflet-pane canvas {
+  max-width: unset;
+}
+
 .fa {
   font-family: FontAwesome !important;
 }
