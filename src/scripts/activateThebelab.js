@@ -29,7 +29,7 @@ const getConfig = (language) => {
   const config = {
     binderOptions: {
       repo: 'LibreTexts/default-env',
-      ref: '2.3.3',
+      ref: '3.0.2',
       binderUrl,
     },
     kernelOptions: {
@@ -45,7 +45,7 @@ const getConfig = (language) => {
       config.kernelOptions.name = 'sagemath';
       break;
     case 'julia':
-      config.kernelOptions.name = 'julia-1.5';
+      config.kernelOptions.name = 'julia-1.6';
       break;
     case 'octave':
       config.kernelOptions.name = 'octave';
@@ -102,7 +102,7 @@ const activateThebelab = (config, detectLanguage = true) => {
       mergeConfig = Object.assign(mergeConfig, getConfig(language));
     }
 
-    loadScript('https://unpkg.com/thebe@0.6.0/lib/index.js')
+    loadScript('https://unpkg.com/thebe@0.7.1/lib/index.js')
       .then(() => {
         thebelab.bootstrap(mergeConfig);
         if (detectLanguage) {
