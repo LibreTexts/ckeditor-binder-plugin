@@ -29,7 +29,7 @@ const getConfig = (language) => {
   const config = {
     binderOptions: {
       repo: 'LibreTexts/default-env',
-      ref: '3.0.2',
+      ref: '3.1.0',
       binderUrl,
     },
     kernelOptions: {
