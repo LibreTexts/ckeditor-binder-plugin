@@ -10,8 +10,6 @@ loadScript('https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.
     if (window.define !== undefined) window.define.amd = null;
   });
 
-loadScript('https://use.fontawesome.com/84b10e0f37.js');
-
 // Adds this plugin to the LibreEditor for later activation
 LibreEditor.binderPlugin = (config) => {
   loadPlugin();
