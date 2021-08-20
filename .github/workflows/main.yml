@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@master
     - name: Bump version number
       run: |
-        VERSION=$(ls release/ | sort | tail -n1 | sed 's/\.md$//')
+        VERSION=$(ls release/ | sort -V | tail -n1 | sed 's/\.md$//')
         DATE=$(TZ='America/Los_Angeles' date -I)
         VERSION_STR="Release: $VERSION - Date: $DATE"
         sed -i "s/Development Version/$VERSION_STR/" src/scripts/activateThebelab.js
