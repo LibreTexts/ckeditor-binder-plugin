@@ -1,9 +1,9 @@
-const codeHtml = (code, language, noCode = false) => {
+const codeHtml = (code, language, noCode = false, readonly = false) => {
   if (noCode) {
     return `<pre data-language="${language}" class="no-code">${code}</pre>`;
   }
 
-  return `<pre data-executable="true" data-language="${language}">${code}</pre>`;
+  return `<pre data-executable="true" data-language="${language}" data-readonly="${readonly}">${code}</pre>`;
 };
 
 const widgetHtml = (data) => {
@@ -13,6 +13,7 @@ const widgetHtml = (data) => {
     language,
     noCode,
     noOutput,
+    readonly,
   } = data;
 
   const outputHtml = `
@@ -22,7 +23,7 @@ const widgetHtml = (data) => {
   `;
 
   return `
-    ${codeHtml(code, language, noCode)}
+    ${codeHtml(code, language, noCode, readonly)}
     ${noOutput ? '' : outputHtml}
   `;
 };
@@ -61,6 +62,7 @@ const widgetConfig = {
     if (preTag) {
       this.setData('noCode', preTag.hasClass('no-code'));
       this.setData('language', preTag.getAttribute('data-language'));
+      this.setData('readonly', preTag.getAttribute('data-readonly'));
       this.setData('code', preTag.getHtml());
     }
 

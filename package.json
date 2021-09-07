@@ -38,6 +38,7 @@
     "ckeditor4": "^4.16.1",
     "core-js": "^3.5.0",
     "dns-packet": "^5.2.2",
+    "glob-parent": "5.1.2",
     "kind-of": "6.0.3",
     "sass": "^1.32.13"
   }

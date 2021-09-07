@@ -229,6 +229,11 @@ const dialogConfig = (editor) => ({
           default: 'both',
         },
         {
+          type: 'checkbox',
+          id: 'checkbox',
+          label: 'Read only',
+        },
+        {
           type: 'html',
           id: 'insert-warning',
           html: insertWarning(),
@@ -270,6 +275,8 @@ const dialogConfig = (editor) => ({
         break;
     }
 
+    const readonly = dialog.getValueOf('tab-basic', 'checkbox');
+
     const cm = getCodeMirror();
 
     let output = document.querySelector('.cke_dialog_contents .jp-OutputArea-output');
@@ -287,6 +294,7 @@ const dialogConfig = (editor) => ({
     widget.setData('noCode', noCode);
     widget.setData('output', output);
     widget.setData('noOutput', noOutput);
+    widget.setData('readonly', readonly);
   },
 });
 
