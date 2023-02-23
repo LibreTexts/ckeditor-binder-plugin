@@ -37,6 +37,16 @@ const getConfig = (language) => {
     },
   };
 
+  // check if override #binderRepoConfig exists
+  let binderRepoConfig = document.getElementById('binderRepoConfig');
+  if (binderRepoConfig && binderRepoConfig.innerText) {
+    binderRepoConfig = binderRepoConfig.innerText;
+    binderRepoConfig = binderRepoConfig.replace('/*<![CDATA[*/', '');
+    binderRepoConfig = binderRepoConfig.replace('/*]]>*/', '');
+    binderRepoConfig = JSON.parse(binderRepoConfig);
+    config.binderOptions = Object.assign(config.binderOptions, { ref: 'master' }, binderRepoConfig);
+  }
+
   switch (language) {
     case 'text/x-c++src':
       config.kernelOptions.name = 'xcpp14';
